@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.7.0](https://github.com/yaoyunchou/goofish-yao-cli/compare/v0.6.3...v0.7.0) (2026-11-12)
+
+
+### Features
+
+* 支持 Docker 独立桌面沙箱模式 ([#45](https://github.com/yaoyunchou/goofish-yao-cli/issues/45)) ([cce6d69](https://github.com/yaoyunchou/goofish-yao-cli/commit/cce6d696fedf535a9e6239f340fa1dc033303d25))
+
+
+### Bug Fixes
+
+* **ci:** automate verified PyPI releases; keep ClawHub manual ([#38](https://github.com/yaoyunchou/goofish-yao-cli/issues/38)) ([4349e5e](https://github.com/yaoyunchou/goofish-yao-cli/commit/4349e5ef5bbe7693f4eaa1d5bf858936c93aa951))
+* **ci:** modernize action runtimes and avoid redundant release PR runs ([#53](https://github.com/yaoyunchou/goofish-yao-cli/issues/53)) ([c9017d2](https://github.com/yaoyunchou/goofish-yao-cli/commit/c9017d28d554ae8142178961bd36de8816dbceab))
+* **ci:** verify PyPI releases through the install index ([#40](https://github.com/yaoyunchou/goofish-yao-cli/issues/40)) ([d9dfc78](https://github.com/yaoyunchou/goofish-yao-cli/commit/d9dfc78b630175eb031cdbfc7612689e10ff4611))
+* **item:** read detail responses across page navigation ([#51](https://github.com/yaoyunchou/goofish-yao-cli/issues/51)) ([19830e0](https://github.com/yaoyunchou/goofish-yao-cli/commit/19830e030594ccd7aee4a2f1665e07d1af936cd7))
+* **item:** retry evaluate when the detail page navigates mid-read ([#48](https://github.com/yaoyunchou/goofish-yao-cli/issues/48)) ([f0299f8](https://github.com/yaoyunchou/goofish-yao-cli/commit/f0299f8533a253c661c5b21d9a3f061adf6f85e0))
+
+
+### Documentation
+
+* **readme:** embed native GitHub video player with sound ([101211b](https://github.com/yaoyunchou/goofish-yao-cli/commit/101211b6889455307ce9dc7e1e5f3c1db7c67508))
+* **readme:** embed native GitHub video player with sound ([a7bdfbd](https://github.com/yaoyunchou/goofish-yao-cli/commit/a7bdfbd0dfd8637f95e25e81edbf72e1c0762451))
+
 ## [Unreleased]
 
 ### Changed

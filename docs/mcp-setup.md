@@ -9,7 +9,7 @@ ClawHub 发布后安装：
 <!-- x-release-please-start-version -->
 ```bash
 openclaw plugins install clawhub:openclaw-goofish-yao
-uvx --from goofish-yao-cli==0.6.3 goofish-yao auth login --qr
+uvx --from goofish-yao-cli==0.7.0 goofish-yao auth login --qr
 openclaw plugins inspect goofish-yao --json
 openclaw gateway restart
 ```

@@ -2,7 +2,7 @@
   "id": "goofish-yao",
   "name": "goofish-yao",
   "description": "ClawHub package identity for the goofish-yao-cli compatible bundle.",
-  "version": "0.6.3",
+  "version": "0.7.0",
   "configSchema": {
     "type": "object",
     "additionalProperties": false,

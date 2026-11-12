@@ -138,7 +138,7 @@ OpenClaw `2026.6.1` 及以上可把本仓库作为 compatible bundle 加载。�
 openclaw plugins install clawhub:openclaw-goofish-yao
 
 # 登录态由用户在终端初始化，不交给 Agent 覆盖
-uvx --from goofish-yao-cli==0.6.3 goofish-yao auth login --qr
+uvx --from goofish-yao-cli==0.7.0 goofish-yao auth login --qr
 
 openclaw plugins inspect goofish-yao --json
 openclaw gateway restart
