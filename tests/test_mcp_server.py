@@ -2,7 +2,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from goofish_cli import mcp_server
+from goofish_yao_cli import mcp_server
 
 
 def test_main_rejects_interactive_terminal(monkeypatch, capsys):
@@ -16,7 +16,7 @@ def test_main_rejects_interactive_terminal(monkeypatch, capsys):
     assert exc_info.value.code == 2
     stderr = capsys.readouterr().err
     assert "MCP stdio server" in stderr
-    assert "goofish --help" in stderr
+    assert "goofish-yao --help" in stderr
 
 
 def test_main_starts_mcp_server_for_piped_stdin(monkeypatch):

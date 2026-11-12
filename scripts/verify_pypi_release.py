@@ -19,13 +19,13 @@ async def handshake(version: str) -> int:
     from mcp import ClientSession, StdioServerParameters
     from mcp.client.stdio import stdio_client
 
-    args = ["--refresh-package", "goofish-cli", "--default-index", "https://pypi.org/simple",
-            "--from", f"goofish-cli=={version}"]
-    result = subprocess.run(["uvx", *args, "goofish", "version"], check=True,
+    args = ["--refresh-package", "goofish-yao-cli", "--default-index", "https://pypi.org/simple",
+            "--from", f"goofish-yao-cli=={version}"]
+    result = subprocess.run(["uvx", *args, "goofish-yao", "version"], check=True,
                             capture_output=True, text=True, timeout=180)
-    if result.stdout.strip() != f"goofish-cli {version}":
+    if result.stdout.strip() != f"goofish-yao-cli {version}":
         raise ValueError("PyPI 安装后的 CLI 版本不一致")
-    params = StdioServerParameters(command="uvx", args=[*args, "goofish-cli"], env=os.environ.copy())
+    params = StdioServerParameters(command="uvx", args=[*args, "goofish-yao-cli"], env=os.environ.copy())
     async with stdio_client(params) as (reader, writer), ClientSession(
         reader, writer, read_timeout_seconds=timedelta(seconds=90)
     ) as client:
@@ -51,13 +51,13 @@ def main() -> None:
     for attempt in range(1, 11):
         try:
             request = urllib.request.Request(
-                "https://pypi.org/simple/goofish-cli/",
+                "https://pypi.org/simple/goofish-yao-cli/",
                 headers={"Accept": "application/vnd.pypi.simple.v1+json", "Cache-Control": "no-cache"},
             )
             with urllib.request.urlopen(request, timeout=20) as response:
                 data = json.load(response)
-            wheel_prefix = "goofish_cli-" + args.version + "-"
-            sdists = {"goofish_cli-" + args.version + ".tar.gz", "goofish-cli-" + args.version + ".tar.gz"}
+            wheel_prefix = "goofish_yao_cli-" + args.version + "-"
+            sdists = {"goofish_yao_cli-" + args.version + ".tar.gz", "goofish-yao-cli-" + args.version + ".tar.gz"}
             files = {value["filename"]: value for value in data["files"]
                      if value["filename"].startswith(wheel_prefix) or value["filename"] in sdists}
             if args.existing_only and not files:

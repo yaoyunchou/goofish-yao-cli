@@ -15,7 +15,7 @@ meta.json 里的 price 单位是元。脚本按目录顺序串行发，每条之
 跑法：
     python examples/publish_from_folder.py listings/
 
-先用 `goofish auth login <cookies.json>` 导入登录态。
+先用 `goofish-yao auth login <cookies.json>` 导入登录态。
 """
 
 from __future__ import annotations
@@ -38,7 +38,7 @@ def publish_one(folder: Path) -> None:
         raise FileNotFoundError(f"{folder} 没有图片")
 
     cmd = [
-        "goofish", "item", "publish",
+        "goofish-yao", "item", "publish",
         "--title", meta["title"],
         "--desc", meta["desc"],
         "--price", str(meta["price"]),

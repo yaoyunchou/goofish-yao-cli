@@ -6,15 +6,15 @@ import json
 import pytest
 from typer.testing import CliRunner
 
-from goofish_cli.cli import app
-from goofish_cli.commands.auth import login as login_mod
-from goofish_cli.core import session as session_mod
-from goofish_cli.core.crypto import decrypt_cookies
+from goofish_yao_cli.cli import app
+from goofish_yao_cli.commands.auth import login as login_mod
+from goofish_yao_cli.core import session as session_mod
+from goofish_yao_cli.core.crypto import decrypt_cookies
 
 
 @pytest.fixture
 def fake_target(tmp_path, monkeypatch):
-    """把写盘目标指到 tmp_path，避免踩到用户真实 ~/.goofish-cli/cookies.json。"""
+    """把写盘目标指到 tmp_path，避免踩到用户真实 ~/.goofish-yao-cli/cookies.json。"""
     target = tmp_path / "cookies.json"
     monkeypatch.setattr(login_mod, "DEFAULT_COOKIE_PATH", target)
     monkeypatch.setattr(session_mod, "DEFAULT_COOKIE_PATH", target)
@@ -23,7 +23,7 @@ def fake_target(tmp_path, monkeypatch):
 
 
 def test_raw_without_source_raises(fake_target, monkeypatch):
-    """goofish auth login --raw（没传 cookie 字符串）→ 必须报参数错，
+    """goofish-yao auth login --raw（没传 cookie 字符串）→ 必须报参数错，
     不能静默走浏览器 auto——否则 --raw 标志被吞，用户会困惑为什么没生效。"""
     # bootstrap 被调就失败（证明没走 auto 分支）
     def boom(*_args, **_kwargs):
@@ -36,7 +36,7 @@ def test_raw_without_source_raises(fake_target, monkeypatch):
 
 
 def test_no_args_goes_to_browser_auto(fake_target, monkeypatch):
-    """goofish auth login 无参数 → 走浏览器 auto-detect。"""
+    """goofish-yao auth login 无参数 → 走浏览器 auto-detect。"""
     fake = [
         {"name": "unb", "value": "U", "domain": "", "path": ""},
         {"name": "_m_h5_tk", "value": "T_xxx_1", "domain": "", "path": ""},
@@ -112,7 +112,7 @@ def test_qr_login_preserves_domain_and_path_in_persisted_records(fake_target, mo
 
     # login_via_qr 在 login.py 里是局部 import，patch 底层模块而非引用名
     monkeypatch.setattr(
-        "goofish_cli.core.qr_login.login_via_qr",
+        "goofish_yao_cli.core.qr_login.login_via_qr",
         lambda **_: fake_records,
     )
 

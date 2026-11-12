@@ -3,7 +3,7 @@
 import base64
 import json
 
-from goofish_cli.core.ws import (
+from goofish_yao_cli.core.ws import (
     build_ack,
     extract_incoming_text,
     extract_meta_event,

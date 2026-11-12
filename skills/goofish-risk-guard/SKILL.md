@@ -8,22 +8,22 @@ description: |
   发送前扫描（外联词、误导承诺），触发 RGV587 风控后的恢复指引。
   **本 skill 主要是知识库 + 检查清单，不直接替用户改文案**——由调用方 skill 拿检查结果去改。
 metadata:
-  author: goofish-cli
+  author: yaoyunchou
   version: "0.3.0"
   tags: [xianyu, risk, compliance, guard]
 allowed-tools:
-  - mcp__goofish__auth_status
-  - mcp__goofish__search_items
-  - mcp__goofish__item_get
-  - mcp__goofish__auth_reset_guard
+  - mcp__goofish-yao__auth_status
+  - mcp__goofish-yao__search_items
+  - mcp__goofish-yao__item_get
+  - mcp__goofish-yao__auth_reset_guard
 ---
 
 # 闲鱼风控预检
 
 ## 工具命名
 
-正文使用 `auth_status` 这类逻辑名。OpenClaw 调 `goofish__<逻辑名>`；
-Claude Code / Cursor 调 `mcp__goofish__<逻辑名>`。frontmatter 的 `allowed-tools`
+正文使用 `auth_status` 这类逻辑名。OpenClaw 调 `goofish-yao__<逻辑名>`；
+Claude Code / Cursor 调 `mcp__goofish-yao__<逻辑名>`。frontmatter 的 `allowed-tools`
 保留 Claude 权限预批准格式，OpenClaw 不读取该字段。
 
 ## 定位
@@ -86,7 +86,7 @@ Claude Code / Cursor 调 `mcp__goofish__<逻辑名>`。frontmatter 的 `allowed-
 **要做**（按顺序）：
 1. 告诉用户：**服务端风控已触发**，原因可能是短时高频写 / 多号同 IP / 新增风险行为
 2. 引导用户：打开浏览器登录闲鱼，正常浏览 3-5 分钟，触发 `x5sec` / `mtop_partitioned_detect` cookie 下发
-3. 用户执行 `goofish auth login --browser chrome` 重新导入（带 x5sec）
+3. 用户执行 `goofish-yao auth login --browser chrome` 重新导入（带 x5sec）
 4. 如果仍失败 → 建议 2-6 小时后再来
 
 详见 `references/x5sec-recovery.md`。

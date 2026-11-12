@@ -9,7 +9,7 @@ import json
 
 import pytest
 
-from goofish_cli.core.ws import recv_ack, wait_ready
+from goofish_yao_cli.core.ws import recv_ack, wait_ready
 
 
 class FakeWS:

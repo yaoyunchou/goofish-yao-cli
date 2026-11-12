@@ -49,8 +49,8 @@
 每个命令文件长这样：
 
 ```python
-from goofish_cli.core import Session, Strategy, command
-from goofish_cli.core.mtop import call
+from goofish_yao_cli.core import Session, Strategy, command
+from goofish_yao_cli.core.mtop import call
 
 @command(
     namespace="item",
@@ -66,16 +66,16 @@ def get(item_id: str) -> dict:
     ...
 ```
 
-- **namespace + name** → CLI 路径 `goofish item get`，MCP tool 名 `item_get`
+- **namespace + name** → CLI 路径 `goofish-yao item get`，MCP tool 名 `item_get`
 - **columns** → 输出契约（table/csv/md 场景的列顺序）
 - **strategy** → 认证要求（PUBLIC / COOKIE / WS）
 - **write=True** → 写操作元数据；实际写端点必须进入 `write_operation(session, bucket)`
 
 ## 风控护栏
 
-1. **滑动窗口预算**（`core/limiter.py`）：按账号和业务桶计数。发布与下架共用 `item.write`，消息用 `message.write`，默认各 1 次/分钟；上传用独立 `media.write`，默认 9 次/分钟。经营预算通过 `GOOFISH_WRITE_RPM` 配置，媒体通过 `GOOFISH_MEDIA_WRITE_RPM` 配置。这是本机预算，不代表平台额度。
+1. **滑动窗口预算**（`core/limiter.py`）：按账号和业务桶计数。发布与下架共用 `item.write`，消息用 `message.write`，默认各 1 次/分钟；上传用独立 `media.write`，默认 9 次/分钟。经营预算通过 `GOOFISH_YAO_WRITE_RPM` 配置，媒体通过 `GOOFISH_YAO_MEDIA_WRITE_RPM` 配置。这是本机预算，不代表平台额度。
 2. **熔断**（`core/guard.py`）：所有写端点先检查账号熔断；命中 `RiskControlError` 后持久化，默认 10 分钟。旧版共享熔断和预算须自然过期。保存失败保留原始风控错误并提示停止写入。
-3. **持久化**（`core/local_state.py`）：稳定锁文件覆盖读、检查和原子替换事务；跨 CLI 进程和 MCP 线程共享。损坏状态拒绝写入，不静默清零。可通过 `GOOFISH_LIMITER_PATH`、`GOOFISH_GUARD_PATH` 选择隔离状态路径。
+3. **持久化**（`core/local_state.py`）：稳定锁文件覆盖读、检查和原子替换事务；跨 CLI 进程和 MCP 线程共享。损坏状态拒绝写入，不静默清零。可通过 `GOOFISH_YAO_LIMITER_PATH`、`GOOFISH_YAO_GUARD_PATH` 选择隔离状态路径。
 4. **响应识别**：MTop 与上传端点根据真实响应确认成功或拒绝。失败尝试不退预算；结果未知时先回读，不自动重发。
 
 发布可接受本地图片，也可通过 `images_json` 复用 `media_upload` 的完整收据；`category_json` 和 `location_json` 接收相应工具返回的已确认 DTO。准备或提交失败保留收据与准备信息，分别报告 `not_submitted`、`submission_rejected` 或 `submission_unknown`。返回商品 ID 代表 `accepted`，详情与商品列表回读负责确认实际保存。
@@ -91,6 +91,6 @@ def get(item_id: str) -> dict:
 - **`t` 毫秒位**：`int(time.time() * 1000)` 取真实毫秒（避免 `int(time.time()) * 1000` 把末三位抹成 000 的精度陷阱）
 - **默认地址**：优先 `selectedPoi`，缺失时使用第一个常用地址；发布使用返回的 `selected` DTO，显式地址通过 `location_json` 提供。
 - **风控识别**：扫描响应体关键字（`RGV587_ERROR` / `punish` / `FAIL_SYS_USER_VALIDATE`），命中即熔断
-- **限流**：滑动窗口预算持久化在 `~/.goofish-cli/limiter.json`
+- **限流**：滑动窗口预算持久化在 `~/.goofish-yao-cli/limiter.json`
 - **形态**：CLI + MCP（+ Skill 规划），同一份 registry 输出三种形态
 - **命令组织**：每命令一个文件，`@command(...)` 装饰器自注册，参照 opencli

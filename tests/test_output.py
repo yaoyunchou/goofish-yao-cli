@@ -1,5 +1,5 @@
 """统一输出渲染器（_as_rows 与 render）的单元测试。"""
-from goofish_cli.core.output import Format, _as_rows, render
+from goofish_yao_cli.core.output import Format, _as_rows, render
 
 # ── _as_rows 结构推导测试 ──────────────────────────────────────────
 

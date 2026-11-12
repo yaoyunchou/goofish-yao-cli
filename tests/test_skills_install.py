@@ -1,11 +1,11 @@
-"""测 goofish skills install 命令：list / copy / force / custom dest / missing bundle."""
+"""测 goofish-yao skills install 命令：list / copy / force / custom dest / missing bundle."""
 from __future__ import annotations
 
 from pathlib import Path
 
 import pytest
 
-from goofish_cli.commands.skills import install as mod
+from goofish_yao_cli.commands.skills import install as mod
 
 
 @pytest.fixture(autouse=True)
@@ -77,7 +77,7 @@ def test_install_force_overwrites(tmp_path) -> None:
 
 def test_command_registered_in_registry() -> None:
     """通过 registry discover 能找到 skills.install 命令。"""
-    from goofish_cli.core.registry import discover, registry
+    from goofish_yao_cli.core.registry import discover, registry
 
     discover()
     reg = registry()
@@ -89,7 +89,7 @@ def test_command_registered_in_registry() -> None:
 
 def test_bundled_skills_missing_and_fallback_unreachable_raises(monkeypatch, tmp_path) -> None:
     """wheel 态找不到 _bundled_skills 且 dev 态 repo skills/ 也不可达时，应抛 FileNotFoundError。"""
-    import goofish_cli
+    import goofish_yao_cli
 
     # 用假 pkg 路径骗 `_bundle_root`：pkg_dir 下没有 _bundled_skills，
     # pkg_dir.parent.parent 下也不会有 skills/ 目录 → 两条路径都失败 → FileNotFoundError
@@ -98,7 +98,7 @@ def test_bundled_skills_missing_and_fallback_unreachable_raises(monkeypatch, tmp
     fake_init = fake_pkg_dir / "__init__.py"
     fake_init.write_text("")
 
-    monkeypatch.setattr(goofish_cli, "__file__", str(fake_init))
+    monkeypatch.setattr(goofish_yao_cli, "__file__", str(fake_init))
 
     with pytest.raises(FileNotFoundError):
         mod._bundle_root()

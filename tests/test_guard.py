@@ -5,11 +5,11 @@ import pytest
 
 
 def test_watch_trips_on_risk(tmp_path, monkeypatch):
-    monkeypatch.setattr("goofish_cli.core.guard.STATE_PATH", tmp_path / "circuit.json")
-    monkeypatch.setenv("GOOFISH_CIRCUIT_BREAK_MINUTES", "60")
+    monkeypatch.setattr("goofish_yao_cli.core.guard.STATE_PATH", tmp_path / "circuit.json")
+    monkeypatch.setenv("GOOFISH_YAO_CIRCUIT_BREAK_MINUTES", "60")
 
-    from goofish_cli.core import guard
-    from goofish_cli.core.errors import RiskControlError
+    from goofish_yao_cli.core import guard
+    from goofish_yao_cli.core.errors import RiskControlError
 
     # 第一次：上下文内抛 RiskControl → 自动熔断
     with pytest.raises(RiskControlError), guard.watch():
@@ -21,12 +21,12 @@ def test_watch_trips_on_risk(tmp_path, monkeypatch):
 
 
 def test_reset_clears_circuit(tmp_path, monkeypatch):
-    monkeypatch.setattr("goofish_cli.core.guard.STATE_PATH", tmp_path / "circuit.json")
+    monkeypatch.setattr("goofish_yao_cli.core.guard.STATE_PATH", tmp_path / "circuit.json")
 
-    from goofish_cli.core import guard
+    from goofish_yao_cli.core import guard
 
     guard.trip("test")
-    from goofish_cli.core.errors import RiskControlError
+    from goofish_yao_cli.core.errors import RiskControlError
     with pytest.raises(RiskControlError):
         guard.check()
     guard.reset()
@@ -38,8 +38,8 @@ def test_reset_clears_circuit(tmp_path, monkeypatch):
 
 def test_classify_risk_via_mtop():
     """mtop._classify_error 命中风控关键字时抛 RiskControlError。"""
-    from goofish_cli.core.errors import RiskControlError
-    from goofish_cli.core.mtop import _classify_error
+    from goofish_yao_cli.core.errors import RiskControlError
+    from goofish_yao_cli.core.mtop import _classify_error
 
     with pytest.raises(RiskControlError):
         _classify_error(

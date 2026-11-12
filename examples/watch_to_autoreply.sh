@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 把 `goofish message watch` 的 JSONL 流接到一个自定义回复脚本。
+# 把 `goofish-yao message watch` 的 JSONL 流接到一个自定义回复脚本。
 # 只处理 event=message，其余（read / new_msg）忽略。
 #
 # 用法：./watch_to_autoreply.sh
@@ -7,7 +7,7 @@
 
 set -euo pipefail
 
-goofish message watch | while IFS= read -r line; do
+goofish-yao message watch | while IFS= read -r line; do
   event=$(echo "$line" | jq -r '.event // empty')
   [[ "$event" != "message" ]] && continue
 
@@ -21,6 +21,6 @@ goofish message watch | while IFS= read -r line; do
   # === 你的回复逻辑在这里 ===
   reply="你好 $sender，我稍后回复你。"
 
-  goofish message send "$cid" "$toid" --text "$reply" >/dev/null
+  goofish-yao message send "$cid" "$toid" --text "$reply" >/dev/null
   echo "[reply] → $reply" >&2
 done

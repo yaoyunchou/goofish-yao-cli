@@ -1,53 +1,29 @@
 <div align="center">
 
-# goofish-cli
+# goofish-yao-cli
 
 **闲鱼 CLI · 原生支持 MCP · 为 AI Agent 而生**
 
 *Goofish (Xianyu) automation CLI · MCP-ready · Built for AI Agents*
 
-[![CI](https://github.com/fancyboi999/goofish-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/fancyboi999/goofish-cli/actions/workflows/ci.yml)
-[![PyPI version](https://img.shields.io/pypi/v/goofish-cli.svg)](https://pypi.org/project/goofish-cli/)
-[![Python](https://img.shields.io/pypi/pyversions/goofish-cli.svg)](https://pypi.org/project/goofish-cli/)
+[![CI](https://github.com/yaoyunchou/goofish-yao-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/yaoyunchou/goofish-yao-cli/actions/workflows/ci.yml)
+[![PyPI version](https://img.shields.io/pypi/v/goofish-yao-cli.svg)](https://pypi.org/project/goofish-yao-cli/)
+[![Python](https://img.shields.io/pypi/pyversions/goofish-yao-cli.svg)](https://pypi.org/project/goofish-yao-cli/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](./LICENSE)
 [![MCP](https://img.shields.io/badge/MCP-ready-8A2BE2)](https://modelcontextprotocol.io)
-[![GitHub stars](https://img.shields.io/github/stars/fancyboi999/goofish-cli?style=social)](https://github.com/fancyboi999/goofish-cli)
+[![GitHub stars](https://img.shields.io/github/stars/yaoyunchou/goofish-yao-cli?style=social)](https://github.com/yaoyunchou/goofish-yao-cli)
 
 </div>
 
-https://github.com/user-attachments/assets/ae20ae2f-ccdf-4d3e-a947-69182d4c4eff
-
-<p align="center">
-  <em>▶️ 播放不了？<a href="media/goofish-cli-promo.mp4">点这里下载高清 MP4（1:32）</a></em>
-</p>
-
-`goofish-cli` 把闲鱼（Xianyu/Goofish）的核心运营能力抽成一套结构化命令，
+`goofish-yao-cli` 是 yaoyunchou 维护的闲鱼（Xianyu/Goofish）命令行工具，fork 自 [fancyboi999/goofish-cli](https://github.com/fancyboi999/goofish-cli)。它把闲鱼的核心运营能力抽成一套结构化命令，
 **同一份定义**同时输出给四种消费者：
 
-- 👨‍💻 **人类**：`goofish item get 12345 --format table`
-- 🤖 **AI Agent（Claude Code / Cursor / Codex）**：`uvx goofish-cli` → 自动注册成 MCP tool
-- 🧩 **Claude Skills**（v0.3）：5 个内置 skill，`goofish skills install` 一行装到 `~/.claude/skills/`
+- 👨‍💻 **人类**：`goofish-yao item get 12345 --format table`
+- 🤖 **AI Agent（Claude Code / Cursor / Codex）**：`uvx goofish-yao-cli` → 自动注册成 MCP tool
+- 🧩 **Claude Skills**（v0.3）：5 个内置 skill，`goofish-yao skills install` 一行装到 `~/.claude/skills/`
 - **OpenClaw**：ClawHub bundle 一次安装 MCP server + 5 个 skills
 
 > 架构思想来自 [opencli](https://github.com/jackwener/opencli) 的 single-registry 设计。
-
----
-
-## 特别鸣谢
-
-<p align="center">
-  <a href="https://www.ipwo.net/?ref=githubgoofishcli">
-    <img src="media/ipwo-banner.png" alt="IPWO 住宅代理：稳定连接、全球节点、多协议支持" width="95%">
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://www.ipwo.net/?ref=githubgoofishcli"><ins>IPWO</ins></a> 拥有 9000 万+ 活跃住宅 IP 资源，覆盖 195+ 个国家和地区。<br>
-  提供动态住宅代理、静态住宅代理及不限量住宅代理。<br>
-  适用于网页抓取、数据采集、浏览器自动化、跨境业务等场景。<br>
-  我们订阅使用 Claude / Claude Code 时采用住宅 IP，长期使用稳定。<br>
-  支持<a href="https://www.ipwo.net/?ref=githubgoofishcli"><ins>免费测试</ins></a>，<strong>9 折优惠码：</strong><code>0203</code>
-</p>
 
 ---
 
@@ -67,19 +43,19 @@ https://github.com/user-attachments/assets/ae20ae2f-ccdf-4d3e-a947-69182d4c4eff
 
 ```bash
 # 1. 安装
-pip install goofish-cli    # 或 uv pip install goofish-cli
+pip install goofish-yao-cli    # 或 uv pip install goofish-yao-cli
 
 # 2. 导入 cookie（从浏览器 DevTools → Application → Cookies 导出）
-goofish auth login ~/Downloads/goofish-cookies.json
+goofish-yao auth login ~/Downloads/goofish-cookies.json
 
 # 3. 验证登录态
-goofish auth status
+goofish-yao auth status
 # → {"unb":"<masked-unb>","tracknick":"<masked-tracknick>","nick":"...","valid":true}
 
 # 4. 干活
-goofish item get 1045171414271
-goofish message watch                               # 实时接收消息
-goofish message send <cid> <toid> --text "在的"    # 发消息
+goofish-yao item get 1045171414271
+goofish-yao message watch                               # 实时接收消息
+goofish-yao message send <cid> <toid> --text "在的"    # 发消息
 ```
 
 ### 不占用桌面的沙箱模式
@@ -87,31 +63,31 @@ goofish message send <cid> <toid> --text "在的"    # 发消息
 需要运行中的本机 Docker Desktop / Docker Engine。安装支持沙箱的版本后，先在终端执行：
 
 ```sh
-goofish sandbox --help
-goofish sandbox start
+goofish-yao sandbox --help
+goofish-yao sandbox start
 # 手动打开输出的观察链接，默认 http://127.0.0.1:16080/vnc.html?autoconnect=1&resize=scale
-goofish sandbox login  # 在虚拟桌面里扫码并确认
+goofish-yao sandbox login  # 在虚拟桌面里扫码并确认
 
-goofish sandbox run auth status --format json
-goofish sandbox run search items '机械键盘' --limit 3
+goofish-yao sandbox run auth status --format json
+goofish-yao sandbox run search items '机械键盘' --limit 3
 ```
 
-让 AI 客户端也使用沙箱时，将原有 `goofish` MCP 配置替换为：
+让 AI 客户端也使用沙箱时，将原有 `goofish-yao` MCP 配置替换为：
 
 ```json
 {
   "mcpServers": {
-    "goofish": {
-      "command": "goofish",
+    "goofish-yao": {
+      "command": "goofish-yao",
       "args": ["sandbox", "mcp"]
     }
   }
 }
 ```
 
-客户端必须能找到 `goofish` 和 `docker`；桌面客户端找不到命令时，将 `command` 改为 `command -v goofish` 输出的绝对路径，并检查客户端 PATH 中是否有 Docker。Codex 使用 TOML，见 [MCP 客户端配置](docs/mcp-setup.md#独立桌面模式)。不要同时保留原来的本机 Goofish server；直接运行 `uvx goofish-cli` 仍使用本机模式。
+客户端必须能找到 `goofish-yao` 和 `docker`；桌面客户端找不到命令时，将 `command` 改为 `command -v goofish-yao` 输出的绝对路径，并检查客户端 PATH 中是否有 Docker。Codex 使用 TOML，见 [MCP 客户端配置](docs/mcp-setup.md#独立桌面模式)。不要同时保留原来的本机 Goofish server；直接运行 `uvx goofish-yao-cli` 仍使用本机模式。
 
-首次启动会下载并构建镜像。Chromium 在容器虚拟桌面里常驻，登录态保存在独立卷；命令不会自动打开宿主机浏览器。平台要求验证时，执行 `goofish sandbox browse --item-id <商品ID>`，在观察页面人工完成。升级后用 `stop`、`start --rebuild` 更新镜像，状态卷保留。
+首次启动会下载并构建镜像。Chromium 在容器虚拟桌面里常驻，登录态保存在独立卷；命令不会自动打开宿主机浏览器。平台要求验证时，执行 `goofish-yao sandbox browse --item-id <商品ID>`，在观察页面人工完成。升级后用 `stop`、`start --rebuild` 更新镜像，状态卷保留。
 
 如果 `sandbox --help` 不识别命令，当前安装的发行版尚未包含沙箱功能。源码安装、完整的登录/恢复步骤和限制见[沙箱指南](docs/sandbox.md)。
 
@@ -124,13 +100,13 @@ v0.3 起内置 5 个 Claude Skill，装完之后 Claude Code / Cursor 里的 Age
 
 ```bash
 # 装到 ~/.claude/skills/（默认）
-goofish skills install
+goofish-yao skills install
 
 # 或者只看有哪些 skill，不拷贝
-goofish skills install --list
+goofish-yao skills install --list
 
 # 或者装到自定义目录 + 覆盖已有的
-goofish skills install --dest ./skills --force
+goofish-yao skills install --dest ./skills --force
 ```
 
 ### 5 个 skill 分工
@@ -147,7 +123,7 @@ skill 的源文件在仓库的 `skills/` 目录下（每个 skill 一个子目�
 + `references/*.md` 知识库）。也可以走 Claude Code Plugin Marketplace 安装：
 
 ```bash
-claude /plugin marketplace add fancyboi999/goofish-cli
+claude /plugin marketplace add yaoyunchou/goofish-yao-cli
 ```
 
 ---
@@ -155,16 +131,16 @@ claude /plugin marketplace add fancyboi999/goofish-cli
 ## OpenClaw / ClawHub
 
 OpenClaw `2026.6.1` 及以上可把本仓库作为 compatible bundle 加载。已发布到
-[ClawHub](https://clawhub.ai/plugins/openclaw-goofish)，安装：
+[ClawHub](https://clawhub.ai/plugins/openclaw-goofish-yao)，安装：
 
 <!-- x-release-please-start-version -->
 ```bash
-openclaw plugins install clawhub:openclaw-goofish
+openclaw plugins install clawhub:openclaw-goofish-yao
 
 # 登录态由用户在终端初始化，不交给 Agent 覆盖
-uvx --from goofish-cli==0.6.3 goofish auth login --qr
+uvx --from goofish-yao-cli==0.6.3 goofish-yao auth login --qr
 
-openclaw plugins inspect goofish --json
+openclaw plugins inspect goofish-yao --json
 openclaw gateway restart
 ```
 <!-- x-release-please-end -->
@@ -173,11 +149,11 @@ openclaw gateway restart
 
 ```bash
 openclaw plugins install -l .
-openclaw plugins inspect goofish --json
+openclaw plugins inspect goofish-yao --json
 ```
 
-重启后新会话会获得 5 个 skills，以及 `goofish__auth_status`、
-`goofish__item_get` 等 MCP tools。bundle 默认不暴露需要操作者执行或会长期阻塞的
+重启后新会话会获得 5 个 skills，以及 `goofish-yao__auth_status`、
+`goofish-yao__item_get` 等 MCP tools。bundle 默认不暴露需要操作者执行或会长期阻塞的
 `auth_login`、`auth_reset_guard`、`message_watch`、`skills_install`。
 
 运行 MCP server 需要 PATH 中有 [`uv`](https://docs.astral.sh/uv/)。完整说明见
@@ -188,10 +164,10 @@ openclaw plugins inspect goofish --json
 ## 📟 命令详略与真实输出
 
 <details open>
-<summary><b><code>goofish list-commands</code></b> — 注册表全景</summary>
+<summary><b><code>goofish-yao list-commands</code></b> — 注册表全景</summary>
 
 ```bash
-$ goofish list-commands --format table
+$ goofish-yao list-commands --format table
 ```
 
 | 命令 | 说明 | 写操作 |
@@ -217,8 +193,8 @@ $ goofish list-commands --format table
 会话读取使用真实消息时间，而非会话创建时间：
 
 ```bash
-goofish message list-chats --format json
-goofish message history <cid> --limit 20 --timeout 30 --format json
+goofish-yao message list-chats --format json
+goofish-yao message history <cid> --limit 20 --timeout 30 --format json
 ```
 
 `list-chats` 默认 `--watch-secs 5`，在一个已就绪的连接中补齐真人会话的最近消息页；
@@ -231,7 +207,7 @@ goofish message history <cid> --limit 20 --timeout 30 --format json
 接口契约与异常边界见 [会话同步](docs/conversation-sync.md)。
 
 <details>
-<summary><b><code>goofish auth status</code></b> — 登录态健康检查</summary>
+<summary><b><code>goofish-yao auth status</code></b> — 登录态健康检查</summary>
 
 ```json
 {
@@ -245,10 +221,10 @@ goofish message history <cid> --limit 20 --timeout 30 --format json
 </details>
 
 <details>
-<summary><b><code>goofish message watch</code></b> — 三类事件 JSONL 流</summary>
+<summary><b><code>goofish-yao message watch</code></b> — 三类事件 JSONL 流</summary>
 
 ```bash
-$ goofish message watch
+$ goofish-yao message watch
 ```
 
 实时输出（小号给主号发 3 条 + 主号读了所有消息）：
@@ -270,10 +246,10 @@ $ goofish message watch
 </details>
 
 <details>
-<summary><b><code>goofish message send</code></b> — 主动发消息</summary>
+<summary><b><code>goofish-yao message send</code></b> — 主动发消息</summary>
 
 ```bash
-$ goofish message send <masked-cid> <masked-user-id> \
+$ goofish-yao message send <masked-cid> <masked-user-id> \
     --text "在的 claude 测试成功 ✅" --item-id 1045171414271
 ```
 
@@ -283,10 +259,10 @@ $ goofish message send <masked-cid> <masked-user-id> \
 </details>
 
 <details>
-<summary><b><code>goofish item publish</code></b> — 发布商品（含风控护栏）</summary>
+<summary><b><code>goofish-yao item publish</code></b> — 发布商品（含风控护栏）</summary>
 
 ```bash
-goofish item publish "男士毛呢大衣 驼色长款" \
+goofish-yao item publish "男士毛呢大衣 驼色长款" \
     "全新未拆封 原价 2999 现 999" ./a.png ./b.png 999 --format json
 ```
 
@@ -296,7 +272,7 @@ goofish item publish "男士毛呢大衣 驼色长款" \
 传入对应工具返回的完整 DTO。
 
 返回 `item_id`、`status="accepted"` 和 `requires_readback=true`；使用
-`goofish item get <item_id>` 和自己的商品列表确认保存。失败也保留已上传图片和准备信息；
+`goofish-yao item get <item_id>` 和自己的商品列表确认保存。失败也保留已上传图片和准备信息；
 `submission_unknown` 必须先核对商品列表，不自动重复发布。
 
 发布与下架共用账号的 `item.write` 预算，默认 1 次/分钟；媒体上传独立计数，默认
@@ -314,15 +290,15 @@ goofish item publish "男士毛呢大衣 驼色长款" \
 ```json
 {
   "mcpServers": {
-    "goofish": {
+    "goofish-yao": {
       "command": "uvx",
-      "args": ["goofish-cli"]
+      "args": ["goofish-yao-cli"]
     }
   }
 }
 ```
 
-Claude 会自动把全部命令看成 tool：`mcp__goofish__item_get` / `mcp__goofish__item_publish` / `mcp__goofish__message_watch`... 你在对话里直接说"帮我看下 itemId=xxx 的详情"，Claude 就会调用。
+Claude 会自动把全部命令看成 tool：`mcp__goofish-yao__item_get` / `mcp__goofish-yao__item_publish` / `mcp__goofish-yao__message_watch`... 你在对话里直接说"帮我看下 itemId=xxx 的详情"，Claude 就会调用。
 
 ---
 
@@ -332,25 +308,25 @@ Claude 会自动把全部命令看成 tool：`mcp__goofish__item_get` / `mcp__go
 |---|---|
 | 11 个核心 mtop 接口 | 发布/下架/查询/图片/类目/地址/IM 全覆盖 |
 | CLI + `--format` 多格式输出 | `json` / `yaml` / `table` / `md` / `csv`，人机两用 |
-| MCP Server | `uvx goofish-cli` 一行接入 Claude Code / Cursor |
+| MCP Server | `uvx goofish-yao-cli` 一行接入 Claude Code / Cursor |
 | WebSocket 批量 push 全量解码 | 一帧多条消息全部还原，不丢单 |
 | WebSocket 自动重连 | 断线自退避重连，长跑无感知 |
 | 已读回执 / typing / 新消息通知分类 | `/s/sync` 元事件结构化为三类 JSONL |
 | 全局限流 + 风控熔断 | 账号业务预算 + RGV587 自动熔断 |
 | 回归验证 | `pytest` + `ruff check src tests` |
-| 包分发 | `pip install goofish-cli` / `uvx goofish-cli` |
+| 包分发 | `pip install goofish-yao-cli` / `uvx goofish-yao-cli` |
 
 ---
 
 ## 🗺 Roadmap
 
 - [x] v0.1：12 个命令 + MCP + IM 三类事件
-- [x] v0.2：`goofish message list-chats`（会话列表 + sessionType 分类：1 真人 / 3 系统 / 6 互动 / 23 通知；`--watch-secs` 支持合并 WS `ackDiff(pts=0)` 历史推送补齐 h5 接口漏掉的会话）
-- [x] v0.2：浏览器自动化链路（吸纳 [OpenCLI](https://github.com/jackwener/opencli) 精华）—— Playwright + 系统 Chrome 驱动 `goofish search items` / `goofish item view`，抗风控 & 完整字段
+- [x] v0.2：`goofish-yao message list-chats`（会话列表 + sessionType 分类：1 真人 / 3 系统 / 6 互动 / 23 通知；`--watch-secs` 支持合并 WS `ackDiff(pts=0)` 历史推送补齐 h5 接口漏掉的会话）
+- [x] v0.2：浏览器自动化链路（吸纳 [OpenCLI](https://github.com/jackwener/opencli) 精华）—— Playwright + 系统 Chrome 驱动 `goofish-yao search items` / `goofish-yao item view`，抗风控 & 完整字段
 - [x] v0.2.3 / v0.2.4：session 自动续命（passport 快速进入）+ `auth login --qr` 扫码兜底
-- [x] v0.3：Claude Skills 包装（5 个 skill：overview / risk-guard / publish-item / reply-buyer / shop-diagnosis）+ `goofish skills install`
-- [ ] v0.4：`goofish message create-chat`（主动与陌生用户建会话）
-- [ ] v0.4：`goofish order`（订单状态查询 / 发货）
+- [x] v0.3：Claude Skills 包装（5 个 skill：overview / risk-guard / publish-item / reply-buyer / shop-diagnosis）+ `goofish-yao skills install`
+- [ ] v0.4：`goofish-yao message create-chat`（主动与陌生用户建会话）
+- [ ] v0.4：`goofish-yao order`（订单状态查询 / 发货）
 - [ ] v0.4：历史数据落盘（SQLite / JSONL），给 shop-diagnosis 做时序归因
 - [ ] v0.5：支持发视频消息
 
@@ -359,8 +335,8 @@ Claude 会自动把全部命令看成 tool：`mcp__goofish__item_get` / `mcp__go
 ## 🛠 开发
 
 ```bash
-git clone https://github.com/fancyboi999/goofish-cli
-cd goofish-cli
+git clone https://github.com/yaoyunchou/goofish-yao-cli
+cd goofish-yao-cli
 uv venv --python 3.11
 uv pip install -e ".[dev]"
 
@@ -386,4 +362,4 @@ uv run ruff check src tests  # 零告警
 
 ## 📜 License
 
-Apache-2.0 © 2026 fancy。详见 [LICENSE](./LICENSE) 和 [NOTICE](./NOTICE)。
+Apache-2.0。原作品 Copyright 2026 fancy；本 fork 的修改由 yaoyunchou 完成。详见 [LICENSE](./LICENSE) 和 [NOTICE](./NOTICE)。

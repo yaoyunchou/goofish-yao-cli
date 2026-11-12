@@ -5,7 +5,7 @@
 """
 from __future__ import annotations
 
-from goofish_cli.core.browser import _cookies_to_playwright
+from goofish_yao_cli.core.browser import _cookies_to_playwright
 
 
 def test_legacy_dict_narrow_mapping():

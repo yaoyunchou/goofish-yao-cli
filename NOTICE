@@ -1,6 +1,9 @@
 goofish-cli
 Copyright 2026 fancy
 
+goofish-yao-cli
+Modifications in this fork are by yaoyunchou.
+
 This tool is provided for lawful automation of the user's own Goofish/Xianyu
 (咸鱼) account. The authors explicitly disallow:
   - Any use for fraud, scalping, or fake transactions

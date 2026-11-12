@@ -7,23 +7,23 @@ description: |
   按卖家预设策略起草回复 → 用户确认后 `message_send`。核心约束：
   **不托管发送权**——所有对外消息必须人类点头；调用 `goofish-risk-guard` 做外联词扫描。
 metadata:
-  author: goofish-cli
+  author: yaoyunchou
   version: "0.3.0"
   tags: [xianyu, im, messaging, buyer]
 allowed-tools:
-  - mcp__goofish__auth_status
-  - mcp__goofish__message_list_chats
-  - mcp__goofish__message_history
-  - mcp__goofish__message_send
-  - mcp__goofish__item_get
+  - mcp__goofish-yao__auth_status
+  - mcp__goofish-yao__message_list_chats
+  - mcp__goofish-yao__message_history
+  - mcp__goofish-yao__message_send
+  - mcp__goofish-yao__item_get
 ---
 
 # 闲鱼回买家消息
 
 ## 工具命名
 
-正文使用 `auth_status` 这类逻辑名。OpenClaw 调 `goofish__<逻辑名>`；
-Claude Code / Cursor 调 `mcp__goofish__<逻辑名>`。frontmatter 的 `allowed-tools`
+正文使用 `auth_status` 这类逻辑名。OpenClaw 调 `goofish-yao__<逻辑名>`；
+Claude Code / Cursor 调 `mcp__goofish-yao__<逻辑名>`。frontmatter 的 `allowed-tools`
 保留 Claude 权限预批准格式，OpenClaw 不读取该字段。
 
 ## 触发姿势

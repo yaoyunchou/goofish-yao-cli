@@ -30,7 +30,7 @@ def normalize(path: str, content: str, version: str):
         return value
     if path == ".mcp.json":
         value = json.loads(content)
-        value["mcpServers"]["goofish"]["args"][1] = "VERSION"
+        value["mcpServers"]["goofish-yao"]["args"][1] = "VERSION"
         return value
     if path == ".release-please-manifest.json":
         value = json.loads(content)
@@ -40,7 +40,7 @@ def normalize(path: str, content: str, version: str):
         value = tomllib.loads(content)
         value["project"]["version"] = "VERSION"
         return value
-    return content.replace("goofish-cli==" + version, "goofish-cli==VERSION")
+    return content.replace("goofish-yao-cli==" + version, "goofish-yao-cli==VERSION")
 
 
 def check(tag: str = "", base: str = "") -> str:
@@ -52,15 +52,15 @@ def check(tag: str = "", base: str = "") -> str:
     for path in JSON_VERSIONS:
         if json.loads((ROOT / path).read_text())["version"] != version:
             raise ValueError(f"版本不一致：{path}")
-    args = json.loads((ROOT / ".mcp.json").read_text())["mcpServers"]["goofish"]["args"]
-    if args != ["--from", "goofish-cli==" + version, "goofish-cli"]:
+    args = json.loads((ROOT / ".mcp.json").read_text())["mcpServers"]["goofish-yao"]["args"]
+    if args != ["--from", "goofish-yao-cli==" + version, "goofish-yao-cli"]:
         raise ValueError("MCP 必须精确锁定本次 Python 版本")
     if json.loads((ROOT / ".release-please-manifest.json").read_text()) != {".": version}:
         raise ValueError("release-please manifest 与 Python 版本不一致")
     if not re.search(r"^## .*\b" + re.escape(version) + r"\b", (ROOT / "CHANGELOG.md").read_text(), re.M):
         raise ValueError("CHANGELOG 缺少本次发布说明")
     for path in DOCS:
-        pins = re.findall(r"goofish-cli==(\d+\.\d+\.\d+)", (ROOT / path).read_text())
+        pins = re.findall(r"goofish-yao-cli==(\d+\.\d+\.\d+)", (ROOT / path).read_text())
         if not pins or any(pin != version for pin in pins):
             raise ValueError(f"安装示例没有同步版本：{path}")
     if base:

@@ -5,8 +5,8 @@ import stat
 
 import pytest
 
-from goofish_cli.core.crypto import decrypt_cookies
-from goofish_cli.core.session import save_cookies_if_unchanged, write_cookies_json
+from goofish_yao_cli.core.crypto import decrypt_cookies
+from goofish_yao_cli.core.session import save_cookies_if_unchanged, write_cookies_json
 
 
 def test_stale_snapshot_cannot_overwrite_new_login(tmp_path):
@@ -22,7 +22,7 @@ def test_stale_snapshot_cannot_overwrite_new_login(tmp_path):
 
 
 def test_failed_replace_preserves_previous_encrypted_file(tmp_path, monkeypatch):
-    from goofish_cli.core import local_state
+    from goofish_yao_cli.core import local_state
 
     path = tmp_path / "cookies.json"
     write_cookies_json(path, {"unb": "first"})
@@ -39,7 +39,7 @@ def test_failed_replace_preserves_previous_encrypted_file(tmp_path, monkeypatch)
 
 
 def test_restart_only_restores_missing_allowed_cookies_with_native_attributes():
-    from goofish_cli.core.sandbox_browser import _missing_cookies
+    from goofish_yao_cli.core.sandbox_browser import _missing_cookies
 
     token = {"name": "token", "value": "old", "domain": ".goofish.com", "path": "/"}
     session = {

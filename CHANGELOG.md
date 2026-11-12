@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Changed
+
+* Rebrand this fork as **goofish-yao-cli** (maintainer yaoyunchou). The user-facing command is `goofish-yao`, the MCP stdio entry is `goofish-yao-cli` (alias `goofish-yao-mcp`), the default state directory is `~/.goofish-yao-cli`, and environment variables use the `GOOFISH_YAO_` prefix. Cookie encryption now uses a fork-specific PBKDF2 salt and machine-key suffix, so it will not decrypt a `~/.goofish-cli` cookie file (and vice versa). License remains Apache-2.0; upstream copyright stays in NOTICE.
+* This repository is a fork of [fancyboi999/goofish-cli](https://github.com/fancyboi999/goofish-cli) at v0.6.3. Entries through 0.6.3 below are upstream history and keep their original command names, paths, environment variables, and links.
+
 ## [0.6.3](https://github.com/fancyboi999/goofish-cli/compare/v0.6.2...v0.6.3) (2026-10-26)
 
 
@@ -266,7 +273,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - 本版本需要用户手动从浏览器导入 cookie（含 `unb` / `_m_h5_tk` / `x5sec`）
 - 遇到 `RGV587_ERROR` 风控时，需在浏览器完成滑块验证并**重新导出**带 `x5sec` 的 cookie
 
-[Unreleased]: https://github.com/fancyboi999/goofish-cli/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/yaoyunchou/goofish-yao-cli/compare/v0.6.3...HEAD
 [0.5.0]: https://github.com/fancyboi999/goofish-cli/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/fancyboi999/goofish-cli/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/fancyboi999/goofish-cli/compare/v0.2.4...v0.3.0

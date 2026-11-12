@@ -7,9 +7,9 @@ from urllib.parse import urlencode
 
 import pytest
 
-from goofish_cli.commands.item.view import _view_result
-from goofish_cli.core.errors import AuthRequiredError, GoofishError, RiskControlError
-from goofish_cli.core.item_page import ItemResponse, _decode_response, _matches_request
+from goofish_yao_cli.commands.item.view import _view_result
+from goofish_yao_cli.core.errors import AuthRequiredError, GoofishError, RiskControlError
+from goofish_yao_cli.core.item_page import ItemResponse, _decode_response, _matches_request
 
 
 def payload(item_id="123", price=0):

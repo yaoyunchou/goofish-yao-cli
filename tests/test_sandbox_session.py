@@ -8,9 +8,9 @@ from types import SimpleNamespace
 
 import pytest
 
-from goofish_cli.core import sandbox_browser as sb
-from goofish_cli.core import session as sm
-from goofish_cli.core.crypto import decrypt_cookies
+from goofish_yao_cli.core import sandbox_browser as sb
+from goofish_yao_cli.core import session as sm
+from goofish_yao_cli.core.crypto import decrypt_cookies
 
 
 def records(user):
@@ -29,7 +29,7 @@ def sandbox(tmp_path, monkeypatch):
     source = tmp_path / "cookies.json"
     old, new = records("synthetic-A"), records("synthetic-B")
     sm.write_cookies_json(source, old)
-    monkeypatch.setenv("GOOFISH_COOKIES_PATH", str(source))
+    monkeypatch.setenv("GOOFISH_YAO_COOKIES_PATH", str(source))
     monkeypatch.setattr(sb, "ROOT", tmp_path)
     monkeypatch.setattr(sb, "STATE_PATH", tmp_path / "desktop-session.enc")
     monkeypatch.setattr(sb, "_generation", lambda: "synthetic-daemon")
@@ -65,7 +65,7 @@ def concurrent_login(source, new):
             sys.executable,
             "-c",
             "import json,sys; from pathlib import Path; "
-            "from goofish_cli.core.session import write_cookies_json; "
+            "from goofish_yao_cli.core.session import write_cookies_json; "
             "write_cookies_json(Path(sys.argv[1]), json.loads(sys.argv[2]))",
             str(source),
             json.dumps(new),

@@ -5,7 +5,7 @@ from unittest.mock import patch
 
 import pytest
 
-from goofish_cli.core import qr_login
+from goofish_yao_cli.core import qr_login
 
 
 def _fake_run(result):
@@ -24,7 +24,7 @@ def _fake_run_raises(exc):
 
 
 def test_login_via_qr_success_writes_disk(tmp_path, monkeypatch):
-    monkeypatch.setenv("GOOFISH_COOKIES_PATH", str(tmp_path / "cookies.json"))
+    monkeypatch.setenv("GOOFISH_YAO_COOKIES_PATH", str(tmp_path / "cookies.json"))
     fake = [
         {"name": "_m_h5_tk", "value": "t", "domain": ".goofish.com", "path": "/"},
         {"name": "unb", "value": "u", "domain": ".goofish.com", "path": "/"},
@@ -40,7 +40,7 @@ def test_login_via_qr_success_writes_disk(tmp_path, monkeypatch):
 
 
 def test_login_via_qr_success_no_persist(tmp_path, monkeypatch):
-    monkeypatch.setenv("GOOFISH_COOKIES_PATH", str(tmp_path / "cookies.json"))
+    monkeypatch.setenv("GOOFISH_YAO_COOKIES_PATH", str(tmp_path / "cookies.json"))
     fake = [
         {"name": "_m_h5_tk", "value": "t", "domain": ".goofish.com", "path": "/"},
         {"name": "unb", "value": "u", "domain": ".goofish.com", "path": "/"},
@@ -55,7 +55,7 @@ def test_login_via_qr_success_no_persist(tmp_path, monkeypatch):
 
 
 def test_login_via_qr_timeout_returns_empty(tmp_path, monkeypatch):
-    monkeypatch.setenv("GOOFISH_COOKIES_PATH", str(tmp_path / "cookies.json"))
+    monkeypatch.setenv("GOOFISH_YAO_COOKIES_PATH", str(tmp_path / "cookies.json"))
     with patch.object(qr_login, "asyncio") as mock_async:
         mock_async.run.side_effect = _fake_run([])  # 模拟超时没拿到 cookies
         out = qr_login.login_via_qr(timeout=5, persist=True)
@@ -73,8 +73,8 @@ def test_login_via_qr_swallows_playwright_exception():
 
 
 def test_login_via_qr_respects_env_timeout(monkeypatch):
-    """timeout=None 时读 GOOFISH_QR_TIMEOUT，传给 _login_via_qr_async。"""
-    monkeypatch.setenv("GOOFISH_QR_TIMEOUT", "30")
+    """timeout=None 时读 GOOFISH_YAO_QR_TIMEOUT，传给 _login_via_qr_async。"""
+    monkeypatch.setenv("GOOFISH_YAO_QR_TIMEOUT", "30")
     captured: list[int] = []
 
     async def _record(t):
@@ -90,7 +90,7 @@ def test_login_via_qr_respects_env_timeout(monkeypatch):
 
 def test_login_via_qr_env_invalid_falls_back(monkeypatch):
     """Copilot review：env 非整数不能让命令崩，要 warn + 回退默认。"""
-    monkeypatch.setenv("GOOFISH_QR_TIMEOUT", "not-a-number")
+    monkeypatch.setenv("GOOFISH_YAO_QR_TIMEOUT", "not-a-number")
     captured: list[int] = []
 
     async def _record(t):
@@ -107,7 +107,7 @@ def test_login_via_qr_env_invalid_falls_back(monkeypatch):
 
 def test_login_via_qr_explicit_timeout_wins_over_env(monkeypatch):
     """显式传 timeout 时不读 env。"""
-    monkeypatch.setenv("GOOFISH_QR_TIMEOUT", "999")
+    monkeypatch.setenv("GOOFISH_YAO_QR_TIMEOUT", "999")
     captured: list[int] = []
 
     async def _record(t):

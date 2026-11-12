@@ -9,21 +9,21 @@ import json
 
 import pytest
 
-from goofish_cli.core import session as session_mod
-from goofish_cli.core.crypto import decrypt_cookies
-from goofish_cli.core.errors import AuthRequiredError
+from goofish_yao_cli.core import session as session_mod
+from goofish_yao_cli.core.crypto import decrypt_cookies
+from goofish_yao_cli.core.errors import AuthRequiredError
 
 
 @pytest.fixture
 def fake_cookies_path(tmp_path, monkeypatch):
     """把 DEFAULT_COOKIE_PATH / DEVICE_CACHE_PATH 指到 tmp_path，
-    避免测试互相干扰、也避免踩到用户真实的 ~/.goofish-cli。"""
+    避免测试互相干扰、也避免踩到用户真实的 ~/.goofish-yao-cli。"""
     cookies = tmp_path / "cookies.json"
     device = tmp_path / "device.json"
     monkeypatch.setattr(session_mod, "DEFAULT_COOKIE_PATH", cookies)
     monkeypatch.setattr(session_mod, "DEVICE_CACHE_PATH", device)
-    monkeypatch.delenv("GOOFISH_COOKIES_PATH", raising=False)
-    monkeypatch.delenv("GOOFISH_NO_CHROME_BOOTSTRAP", raising=False)
+    monkeypatch.delenv("GOOFISH_YAO_COOKIES_PATH", raising=False)
+    monkeypatch.delenv("GOOFISH_YAO_NO_CHROME_BOOTSTRAP", raising=False)
     return cookies
 
 
@@ -89,8 +89,8 @@ def test_load_falls_back_to_auth_error_when_bootstrap_fails(fake_cookies_path, m
 
 
 def test_load_skips_bootstrap_when_env_disabled(fake_cookies_path, monkeypatch):
-    """GOOFISH_NO_CHROME_BOOTSTRAP=1 → 不自动探测浏览器，直接报错。CI 场景需要这个开关。"""
-    monkeypatch.setenv("GOOFISH_NO_CHROME_BOOTSTRAP", "1")
+    """GOOFISH_YAO_NO_CHROME_BOOTSTRAP=1 → 不自动探测浏览器，直接报错。CI 场景需要这个开关。"""
+    monkeypatch.setenv("GOOFISH_YAO_NO_CHROME_BOOTSTRAP", "1")
 
     def fail(*_a, **_k):
         raise AssertionError("bootstrap 被触发了")
@@ -151,7 +151,7 @@ def test_cookie_records_preserves_domain_from_bootstrap(tmp_path, monkeypatch):
     device_path = tmp_path / "device.json"
     monkeypatch.setattr(session_mod, "DEFAULT_COOKIE_PATH", cookies_path)
     monkeypatch.setattr(session_mod, "DEVICE_CACHE_PATH", device_path)
-    monkeypatch.delenv("GOOFISH_COOKIES_PATH", raising=False)
+    monkeypatch.delenv("GOOFISH_YAO_COOKIES_PATH", raising=False)
 
     # records 形态：unb/tracknick 在 .goofish.com，_m_h5_tk 在 .taobao.com
     fake_records = [
@@ -182,7 +182,7 @@ def test_legacy_flat_dict_decrypts_to_domain_empty_records(tmp_path, monkeypatch
     device_path = tmp_path / "device.json"
     monkeypatch.setattr(session_mod, "DEFAULT_COOKIE_PATH", cookies_path)
     monkeypatch.setattr(session_mod, "DEVICE_CACHE_PATH", device_path)
-    monkeypatch.delenv("GOOFISH_COOKIES_PATH", raising=False)
+    monkeypatch.delenv("GOOFISH_YAO_COOKIES_PATH", raising=False)
 
     # 写入 legacy 加密 flat dict
     session_mod.write_cookies_json(cookies_path, {"unb": "UL", "_m_h5_tk": "TL_x_1"})

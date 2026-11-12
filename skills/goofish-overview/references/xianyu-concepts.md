@@ -89,7 +89,7 @@ Agent 回议价时的阶梯在 `goofish-reply-buyer/references/bargain-ladder.md
 - 专业卖家 3-5 小号分散类目
 - **同 IP 关联**（一机多号/一家多号）会被判定关联账号——一号违规全部受牵连
 - **同设备指纹**（同一浏览器 profile）同理
-- 本工具当前是**单 session**（v0.2.x），多号切换靠用户换 `GOOFISH_COOKIES_PATH` 手动隔离
+- 本工具当前是**单 session**（v0.2.x），多号切换靠用户换 `GOOFISH_YAO_COOKIES_PATH` 手动隔离
 
 ### 饱和式封号（2023 热词）
 - 卖家圈对"一次性批量封号"现象的俗称

@@ -1,6 +1,6 @@
 """验证 _build_publish_data 的 payload 构造 —— 关键字段防回归。"""
 
-from goofish_cli.commands.item.publish import _build_publish_data
+from goofish_yao_cli.commands.item.publish import _build_publish_data
 
 CAT = {"cat_id": "50106003", "cat_name": "男士毛呢大衣", "channel_cat_id": "126860482", "tb_cat_id": "50025883"}
 LOC = {
