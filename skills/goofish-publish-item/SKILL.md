@@ -7,24 +7,24 @@ description: |
   拿默认地址 → 调用 `item_publish` 一键发布。核心约束：**发送前必须让用户确认文案**，
   不自动提交；调用 `goofish-risk-guard` 做发布前扫描。
 metadata:
-  author: goofish-cli
+  author: yaoyunchou
   version: "0.3.0"
   tags: [xianyu, publish, listing]
 allowed-tools:
-  - mcp__goofish__auth_status
-  - mcp__goofish__category_recommend
-  - mcp__goofish__media_upload
-  - mcp__goofish__location_default
-  - mcp__goofish__item_publish
-  - mcp__goofish__item_get
+  - mcp__goofish-yao__auth_status
+  - mcp__goofish-yao__category_recommend
+  - mcp__goofish-yao__media_upload
+  - mcp__goofish-yao__location_default
+  - mcp__goofish-yao__item_publish
+  - mcp__goofish-yao__item_get
 ---
 
 # 闲鱼发商品
 
 ## 工具命名
 
-正文使用 `auth_status` 这类逻辑名。OpenClaw 调 `goofish__<逻辑名>`；
-Claude Code / Cursor 调 `mcp__goofish__<逻辑名>`。frontmatter 的 `allowed-tools`
+正文使用 `auth_status` 这类逻辑名。OpenClaw 调 `goofish-yao__<逻辑名>`；
+Claude Code / Cursor 调 `mcp__goofish-yao__<逻辑名>`。frontmatter 的 `allowed-tools`
 保留 Claude 权限预批准格式，OpenClaw 不读取该字段。
 
 ## 触发姿势
@@ -43,7 +43,7 @@ Claude Code / Cursor 调 `mcp__goofish__<逻辑名>`。frontmatter 的 `allowed-
 ```
 调 auth_status
   valid=true → 继续
-  valid=false → 不继续；告诉用户: "登录态失效了，请执行 goofish auth login（扫码走 --qr）"，停。
+  valid=false → 不继续；告诉用户: "登录态失效了，请执行 goofish-yao auth login（扫码走 --qr）"，停。
 ```
 
 ### Step 2 · 信息收集

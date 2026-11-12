@@ -3,7 +3,7 @@ from __future__ import annotations
 
 
 def test_discover_all_commands():
-    from goofish_cli.core.registry import discover, iter_commands
+    from goofish_yao_cli.core.registry import discover, iter_commands
 
     discover()
     names = [c.full_name for c in iter_commands()]
@@ -23,7 +23,7 @@ def test_discover_all_commands():
 
 
 def test_write_commands_marked():
-    from goofish_cli.core.registry import discover, registry
+    from goofish_yao_cli.core.registry import discover, registry
 
     discover()
     r = registry()

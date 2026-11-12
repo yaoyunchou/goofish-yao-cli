@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from goofish_cli.commands.message.list_chats import _parse_session, _watch_record
+from goofish_yao_cli.commands.message.list_chats import _parse_session, _watch_record
 
 
 def test_parse_session_full():

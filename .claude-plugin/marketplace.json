@@ -1,22 +1,22 @@
 {
   "$schema": "https://claude.ai/schemas/plugin-marketplace.json",
-  "name": "goofish-cli-skills",
-  "displayName": "goofish-cli Skills",
-  "description": "闲鱼（goofish.com）自动化运营的 Claude Skills 套件。配合 goofish-cli MCP server 使用，让 Agent 在发布商品 / 回复买家 / 风控预检 / 店铺诊断这些场景里上手即会。",
+  "name": "goofish-yao-cli-skills",
+  "displayName": "goofish-yao-cli Skills",
+  "description": "闲鱼（goofish.com）自动化运营的 Claude Skills 套件。配合 goofish-yao-cli MCP server 使用，让 Agent 在发布商品 / 回复买家 / 风控预检 / 店铺诊断这些场景里上手即会。",
   "version": "0.6.3",
   "author": {
-    "name": "fancy",
-    "url": "https://github.com/fancyboi999"
+    "name": "yaoyunchou",
+    "url": "https://github.com/yaoyunchou"
   },
-  "homepage": "https://github.com/fancyboi999/goofish-cli",
+  "homepage": "https://github.com/yaoyunchou/goofish-yao-cli",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fancyboi999/goofish-cli.git"
+    "url": "https://github.com/yaoyunchou/goofish-yao-cli.git"
   },
   "license": "Apache-2.0",
   "requires": {
     "mcp": [
-      "goofish"
+      "goofish-yao"
     ]
   },
   "plugins": [
@@ -52,12 +52,12 @@
       "command": "uvx",
       "args": [
         "--from",
-        "goofish-cli",
-        "goofish",
+        "goofish-yao-cli",
+        "goofish-yao",
         "skills",
         "install"
       ],
-      "description": "运行 `uvx --from goofish-cli goofish skills install` 把所有 skill 复制到 ~/.claude/skills/。"
+      "description": "运行 `uvx --from goofish-yao-cli goofish-yao skills install` 把所有 skill 复制到 ~/.claude/skills/。"
     },
     "manual": {
       "description": "也可以直接 clone 仓库并把 skills/ 下的任一目录拷到 ~/.claude/skills/。"
@@ -65,7 +65,7 @@
   },
   "tags": [
     "xianyu",
-    "goofish",
+    "goofish-yao",
     "ecommerce",
     "automation",
     "mcp",

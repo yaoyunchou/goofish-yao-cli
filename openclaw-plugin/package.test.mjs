@@ -21,35 +21,35 @@ const overviewSkill = readFileSync(
   "utf8",
 );
 
-test("keeps the OpenClaw package aligned with goofish-cli", () => {
+test("keeps the OpenClaw package aligned with goofish-yao-cli", () => {
   const pythonVersion = pyproject.match(/^version = "([^"]+)"$/m)?.[1];
   assert.equal(packageJson.version, pythonVersion);
   assert.equal(bundleManifest.version, pythonVersion);
   assert.equal(openClawManifest.version, pythonVersion);
-  assert.equal(openClawManifest.id, "goofish");
+  assert.equal(openClawManifest.id, "goofish-yao");
   assert.deepEqual(openClawManifest.configSchema, {
     type: "object",
     additionalProperties: false,
     properties: {},
   });
-  assert.equal(bundleManifest.name, "goofish");
+  assert.equal(bundleManifest.name, "goofish-yao");
   assert.equal(bundleManifest.skills, "./skills/");
   assert.equal(bundleManifest.mcpServers, "./.mcp.json");
-  assert.equal(bundleManifest.author.name, "fancy");
-  assert.equal(bundleManifest.interface.displayName, "Goofish");
+  assert.equal(bundleManifest.author.name, "yaoyunchou");
+  assert.equal(bundleManifest.interface.displayName, "goofish-yao");
   assert.ok(Array.isArray(bundleManifest.interface.defaultPrompt));
   assert.ok(bundleManifest.interface.defaultPrompt.length > 0);
   assert.equal(packageJson.openclaw.extensions, undefined);
-  assert.equal(packageJson.openclaw.install.clawhubSpec, "clawhub:openclaw-goofish");
+  assert.equal(packageJson.openclaw.install.clawhubSpec, "clawhub:openclaw-goofish-yao");
   assert.equal(packageJson.openclaw.install.defaultChoice, "clawhub");
   assert.equal(packageJson.openclaw.install.minHostVersion, ">=2026.6.1");
   assert.equal(packageJson.openclaw.compat.pluginApi, ">=2026.6.1");
   assert.equal(packageJson.peerDependenciesMeta.openclaw.optional, true);
   assert.ok(packageJson.openclaw.release.publishToClawHub);
 
-  const server = mcpConfig.mcpServers.goofish;
+  const server = mcpConfig.mcpServers["goofish-yao"];
   assert.equal(server.command, "uvx");
-  assert.deepEqual(server.args, ["--from", `goofish-cli==${pythonVersion}`, "goofish-cli"]);
+  assert.deepEqual(server.args, ["--from", `goofish-yao-cli==${pythonVersion}`, "goofish-yao-cli"]);
   assert.equal(server.supportsParallelToolCalls, false);
   assert.deepEqual(server.toolFilter.exclude.toSorted(), [
     "auth_login",
@@ -60,12 +60,12 @@ test("keeps the OpenClaw package aligned with goofish-cli", () => {
 });
 
 test("documents host-specific MCP tool names", () => {
-  assert.match(overviewSkill, /goofish__auth_status/);
-  assert.match(overviewSkill, /mcp__goofish__auth_status/);
+  assert.match(overviewSkill, /goofish-yao__auth_status/);
+  assert.match(overviewSkill, /mcp__goofish-yao__auth_status/);
 });
 
 test("packs only the OpenClaw bundle metadata, docs, and skills", () => {
-  const packDirectory = mkdtempSync(join(tmpdir(), "openclaw-goofish-pack-"));
+  const packDirectory = mkdtempSync(join(tmpdir(), "openclaw-goofish-yao-pack-"));
   const repository = new URL("..", import.meta.url);
 
   try {

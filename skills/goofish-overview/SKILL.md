@@ -2,33 +2,33 @@
 name: goofish-overview
 description: |
   闲鱼（goofish.com）自动化运营的总入口 skill。何时激活：用户首次提到
-  闲鱼 / 咸鱼 / goofish / 二手交易 / 挂闲置 / 回买家消息 / 发商品到闲鱼，
-  或用户询问本工具如何使用、有哪些能力、能做什么。本 skill 介绍 goofish-cli
+  闲鱼 / 咸鱼 / goofish / goofish-yao / 二手交易 / 挂闲置 / 回买家消息 / 发商品到闲鱼，
+  或用户询问本工具如何使用、有哪些能力、能做什么。本 skill 介绍 goofish-yao-cli
   的定位、账号模型、17 个 MCP 工具速查、风控底线，并指向其它专项 skill
   （goofish-publish-item / goofish-reply-buyer / goofish-risk-guard /
   goofish-shop-diagnosis）。
 metadata:
-  author: goofish-cli
+  author: yaoyunchou
   version: "0.3.0"
-  tags: [xianyu, goofish, overview, index]
+  tags: [xianyu, goofish-yao, overview, index]
 ---
 
-# goofish-cli 总览
+# goofish-yao-cli 总览
 
 ## 这是什么
 
-`goofish-cli` 是一个 **Python CLI + MCP server + Agent Skills** 三合一工具包，
+`goofish-yao-cli` 是一个 **Python CLI + MCP server + Agent Skills** 三合一工具包，
 让 AI Agent 能像熟练卖家一样操作闲鱼：发商品、回消息、查风控、诊断店铺。
 
 你（Agent）在 OpenClaw / Claude Code / Cursor 里通过 MCP 看到的工具，都来自同一个
-`goofish` server（`FastMCP("goofish")`）。
+`goofish-yao` server（`FastMCP("goofish-yao")`）。
 
 ## 工具命名
 
 本文使用 registry 里的逻辑名（例如 `auth_status`）。实际调用时按宿主补前缀：
 
-- OpenClaw：`goofish__auth_status`
-- Claude Code / Cursor：`mcp__goofish__auth_status`
+- OpenClaw：`goofish-yao__auth_status`
+- Claude Code / Cursor：`mcp__goofish-yao__auth_status`
 
 ## 四个专项 Skill 的分工
 
@@ -48,10 +48,10 @@ metadata:
 
 - 登录态由 `auth_status` 检查，返回 `{valid: bool}`。
 - 自动刷新链路已内置（v0.2.2 - v0.2.4）：token 过期自动续、session 过期
-  自动点 passport "快速进入"、浏览器免密失效需用户 `goofish auth login --qr`。
+  自动点 passport "快速进入"、浏览器免密失效需用户 `goofish-yao auth login --qr`。
 - **Agent 不应主动调 `auth_login`**，这是敏感命令（会覆盖磁盘 cookie）。
-  只在 `auth_status` 返回 invalid 时提示用户手动 `goofish auth login` 或
-  `goofish auth login --qr`。
+  只在 `auth_status` 返回 invalid 时提示用户手动 `goofish-yao auth login` 或
+  `goofish-yao auth login --qr`。
 - 账号身份细节见 `references/accounts.md`。
 
 ## 17 个 MCP 工具速查
@@ -87,10 +87,10 @@ metadata:
 
 ## 工作流惯例
 
-Agent 在 goofish 任务里请遵守：
+Agent 在 goofish-yao 任务里请遵守：
 
 1. **任何写操作前先读 `auth_status`**，避免 token 已过期却继续写 → 白忙一场。
-2. **`item_publish / media_upload / message_send` 都有速率限制**（账号业务预算），不要短时间连发。RGV587 触发后需用户手动 `goofish auth reset-guard`。
+2. **`item_publish / media_upload / message_send` 都有速率限制**（账号业务预算），不要短时间连发。RGV587 触发后需用户手动 `goofish-yao auth reset-guard`。
 3. **所有对外发送（发商品、发消息）务必让用户先确认文案**，不要自动提交。
 4. **多步任务中途报状态**：上一步完成了什么、下一步准备做什么。闲鱼任务
    通常是 3-6 步，用户期望有进度感。

@@ -1,5 +1,5 @@
 """纯函数测 item list 的参数校验 + 提取。"""
-from goofish_cli.commands.item.list import __test__ as t
+from goofish_yao_cli.commands.item.list import __test__ as t
 
 # ── _normalize_limit ──────────────────────────────────────
 

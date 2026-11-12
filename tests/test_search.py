@@ -5,8 +5,8 @@ import asyncio
 
 import pytest
 
-from goofish_cli.commands.search.search import __test__ as t
-from goofish_cli.commands.search.search import _item_id_from_url
+from goofish_yao_cli.commands.search.search import __test__ as t
+from goofish_yao_cli.commands.search.search import _item_id_from_url
 
 
 def test_normalize_limit_clamps_and_defaults():

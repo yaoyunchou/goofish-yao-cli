@@ -14,7 +14,7 @@ body:
     attributes:
       label: 想要的接口 / 命令
       placeholder: |
-        `goofish item list --status selling`
+        `goofish-yao item list --status selling`
         返回：[{itemId, title, price, updatedAt}]
   - type: textarea
     id: alternatives

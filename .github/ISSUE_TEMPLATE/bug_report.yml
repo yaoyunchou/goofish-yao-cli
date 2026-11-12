@@ -5,8 +5,8 @@ body:
   - type: input
     id: version
     attributes:
-      label: goofish-cli 版本
-      placeholder: "运行 `goofish version` 获取"
+      label: goofish-yao-cli 版本
+      placeholder: "运行 `goofish-yao version` 获取"
     validations:
       required: true
   - type: dropdown
@@ -29,8 +29,8 @@ body:
       label: 复现步骤
       description: 请给出最小复现命令（**不要粘贴 cookie**）
       placeholder: |
-        1. `goofish auth login ...`
-        2. `goofish item get 12345`
+        1. `goofish-yao auth login ...`
+        2. `goofish-yao item get 12345`
         3. 报错：...
     validations:
       required: true

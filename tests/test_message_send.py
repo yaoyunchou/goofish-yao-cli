@@ -17,8 +17,8 @@ from contextlib import asynccontextmanager
 
 import pytest
 
-from goofish_cli.commands.message import send as send_mod
-from goofish_cli.core.errors import GoofishError
+from goofish_yao_cli.commands.message import send as send_mod
+from goofish_yao_cli.core.errors import GoofishError
 
 SEND_LWP = "/r/MessageSend/sendByReceiverScope"
 CREATE_LWP = "/r/SingleChatConversation/create"
@@ -200,10 +200,10 @@ class TestCreateChat:
 # --- 把真实实现的超时压到测试可接受的量级 ---
 
 async def _short_wait_ready(ws, *, mids=None, timeout=15.0):
-    from goofish_cli.core.ws import wait_ready
+    from goofish_yao_cli.core.ws import wait_ready
     return await wait_ready(ws, mids=mids, timeout=0.3)
 
 
 async def _short_recv_ack(ws, mid, *, timeout=10.0):
-    from goofish_cli.core.ws import recv_ack
+    from goofish_yao_cli.core.ws import recv_ack
     return await recv_ack(ws, mid, timeout=0.3)

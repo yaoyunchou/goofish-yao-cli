@@ -12,7 +12,7 @@ import http.cookiejar as cookiejar
 
 import pytest
 
-from goofish_cli.core import browser_cookie as bc
+from goofish_yao_cli.core import browser_cookie as bc
 
 
 def _make_cookie(name: str, value: str, domain: str) -> cookiejar.Cookie:

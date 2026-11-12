@@ -8,10 +8,10 @@ import pytest
 import typer
 from typer.testing import CliRunner
 
-from goofish_cli.cli import app
-from goofish_cli.core.browser import goofish_page
-from goofish_cli.core.errors import AuthRequiredError, GoofishError
-from goofish_cli.sandbox import cli
+from goofish_yao_cli.cli import app
+from goofish_yao_cli.core.browser import goofish_page
+from goofish_yao_cli.core.errors import AuthRequiredError, GoofishError
+from goofish_yao_cli.sandbox import cli
 
 runner = CliRunner()
 
@@ -39,7 +39,7 @@ def test_run_preserves_arguments_and_child_exit_code(monkeypatch):
     result = runner.invoke(app, ["sandbox", "run", "search", "items", query, "--limit", "3"])
     assert result.exit_code == 23
     assert calls == [
-        ("exec", "-i", cli.CONTAINER, "goofish", "search", "items", query, "--limit", "3")
+        ("exec", "-i", cli.CONTAINER, "goofish-yao", "search", "items", query, "--limit", "3")
     ]
 
 
@@ -54,7 +54,7 @@ def test_run_forwards_business_help(monkeypatch):
     monkeypatch.setattr(cli, "_docker", docker)
     result = runner.invoke(app, ["sandbox", "run", "search", "items", "--help"])
     assert result.exit_code == 0
-    assert calls == [("exec", "-i", cli.CONTAINER, "goofish", "search", "items", "--help")]
+    assert calls == [("exec", "-i", cli.CONTAINER, "goofish-yao", "search", "items", "--help")]
 
 
 def test_stopped_sandbox_never_runs_a_local_command(monkeypatch):
@@ -72,7 +72,7 @@ def test_unowned_container_is_not_stopped(monkeypatch):
     monkeypatch.setattr(cli, "_docker", lambda *a, **kw: pytest.fail("不能修改其他容器"))
     result = runner.invoke(app, ["sandbox", "stop"])
     assert result.exit_code == 1
-    assert "不属于 goofish" in result.output
+    assert "不属于 goofish-yao" in result.output
 
 
 def test_unowned_state_volume_is_not_reused(monkeypatch):
@@ -82,7 +82,7 @@ def test_unowned_state_volume_is_not_reused(monkeypatch):
     monkeypatch.setattr(cli, "_docker", lambda *a, **kw: pytest.fail("不能修改其他卷"))
     result = runner.invoke(app, ["sandbox", "start"])
     assert result.exit_code == 1
-    assert "不属于 goofish" in result.output
+    assert "不属于 goofish-yao" in result.output
 
 
 def test_public_viewer_binding_is_rejected_before_start(monkeypatch):
@@ -108,7 +108,7 @@ def test_mcp_transport_has_no_stdout_banner(monkeypatch):
     result = runner.invoke(app, ["sandbox", "mcp"])
     assert result.exit_code == 0
     assert result.stdout == ""
-    assert calls == [("exec", "-i", cli.CONTAINER, "goofish-cli")]
+    assert calls == [("exec", "-i", cli.CONTAINER, "goofish-yao-cli")]
 
 
 def test_interactive_mcp_does_not_start_docker(monkeypatch):
@@ -149,7 +149,7 @@ def test_login_checks_remote_validity_without_printing_account_data(monkeypatch,
 
 
 async def test_sandbox_runtime_rejects_missing_virtual_display(monkeypatch):
-    monkeypatch.setenv("GOOFISH_DESKTOP_SANDBOX", "1")
+    monkeypatch.setenv("GOOFISH_YAO_DESKTOP_SANDBOX", "1")
     monkeypatch.setenv("DISPLAY", ":99")
     with pytest.raises(GoofishError, match="不会回退"):
         async with goofish_page(cookies={}):
@@ -157,9 +157,9 @@ async def test_sandbox_runtime_rejects_missing_virtual_display(monkeypatch):
 
 
 async def test_missing_login_does_not_leave_temporary_profiles(monkeypatch, tmp_path):
-    from goofish_cli.core import browser
+    from goofish_yao_cli.core import browser
 
-    monkeypatch.delenv("GOOFISH_DESKTOP_SANDBOX", raising=False)
+    monkeypatch.delenv("GOOFISH_YAO_DESKTOP_SANDBOX", raising=False)
     monkeypatch.setattr(browser, "PROFILES_PARENT", tmp_path)
 
     def missing():

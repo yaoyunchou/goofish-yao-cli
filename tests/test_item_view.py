@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import pytest
 
-from goofish_cli.commands.item.view import __test__ as t
-from goofish_cli.core.errors import GoofishError
+from goofish_yao_cli.commands.item.view import __test__ as t
+from goofish_yao_cli.core.errors import GoofishError
 
 
 def test_normalize_item_id_accepts_digits():

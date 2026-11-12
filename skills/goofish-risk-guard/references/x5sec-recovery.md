@@ -43,7 +43,7 @@ auth_reset_guard → 再调原接口 → 仍失败 → 是服务端风控
 > 看起来闲鱼服务端触发了风控，本地解锁没用。恢复姿势是：
 > 1. 打开浏览器（Chrome / Edge），手动登录闲鱼
 > 2. 正常浏览 3-5 分钟（进几个商品详情页、翻翻首页）——让 `x5sec` 和 `mtop_partitioned_detect` 这两个关键 cookie 下发
-> 3. 回来执行 `goofish auth login --browser chrome`（从浏览器导入最新 cookie）
+> 3. 回来执行 `goofish-yao auth login --browser chrome`（从浏览器导入最新 cookie）
 > 4. 再试刚才的操作
 
 ### Step 3 · 如果仍失败
@@ -65,7 +65,7 @@ auth_reset_guard → 再调原接口 → 仍失败 → 是服务端风控
 | `isg` | 行为指纹 session |
 | `l` | 浏览器级会话标识 |
 
-**导 cookie 必须带全这几个**——goofish-cli 的 `auth login --browser chrome` 默认会带（如果浏览器里有）。
+**导 cookie 必须带全这几个**——goofish-yao-cli 的 `auth login --browser chrome` 默认会带（如果浏览器里有）。
 
 ## 预防
 
@@ -78,7 +78,7 @@ auth_reset_guard → 再调原接口 → 仍失败 → 是服务端风控
 
 ## 自动化链路的限度
 
-goofish-cli v0.2.2-v0.2.4 有自动刷 token + 自动点"快速进入"，但**这些只解 session 过期，不解风控**。
+goofish-yao-cli v0.2.2-v0.2.4 有自动刷 token + 自动点"快速进入"，但**这些只解 session 过期，不解风控**。
 
 ```
 FAIL_SYS_TOKEN_EXOIRED  → 自动刷 ✅

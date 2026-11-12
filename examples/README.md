@@ -1,6 +1,6 @@
 # Examples
 
-几个常用场景的端到端脚本。跑之前先 `goofish auth login <cookies.json>`。
+几个常用场景的端到端脚本。跑之前先 `goofish-yao auth login <cookies.json>`。
 
 | 文件 | 场景 |
 |---|---|

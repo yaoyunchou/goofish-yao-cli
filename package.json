@@ -1,22 +1,22 @@
 {
-  "name": "openclaw-goofish",
+  "name": "openclaw-goofish-yao",
   "version": "0.6.3",
-  "description": "OpenClaw plugin for goofish-cli MCP tools and Xianyu operation skills.",
+  "description": "OpenClaw plugin for goofish-yao-cli MCP tools and Xianyu operation skills.",
   "license": "Apache-2.0",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fancyboi999/goofish-cli.git"
+    "url": "https://github.com/yaoyunchou/goofish-yao-cli.git"
   },
-  "homepage": "https://github.com/fancyboi999/goofish-cli",
+  "homepage": "https://github.com/yaoyunchou/goofish-yao-cli",
   "bugs": {
-    "url": "https://github.com/fancyboi999/goofish-cli/issues"
+    "url": "https://github.com/yaoyunchou/goofish-yao-cli/issues"
   },
   "keywords": [
     "openclaw",
     "clawhub",
     "xianyu",
-    "goofish",
+    "goofish-yao",
     "mcp"
   ],
   "files": [
@@ -47,7 +47,7 @@
   },
   "openclaw": {
     "install": {
-      "clawhubSpec": "clawhub:openclaw-goofish",
+      "clawhubSpec": "clawhub:openclaw-goofish-yao",
       "defaultChoice": "clawhub",
       "minHostVersion": ">=2026.6.1"
     },

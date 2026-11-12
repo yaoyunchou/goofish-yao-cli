@@ -1,7 +1,17 @@
 """Cookie 加密模块测试。"""
 from __future__ import annotations
 
-from goofish_cli.core.crypto import decrypt_cookies, encrypt_cookies
+import inspect
+
+from goofish_yao_cli.core.crypto import _SALT, _machine_key, decrypt_cookies, encrypt_cookies
+
+
+def test_key_material_is_specific_to_this_fork():
+    """本 fork 的 salt 和机器密钥后缀不能解开上游 ~/.goofish-cli 的 cookie。"""
+    assert _SALT == b"goofish-yao-cli-cookie-enc-v1"
+    source = inspect.getsource(_machine_key)
+    assert ":goofish-yao-cli" in source
+    assert "goofish-cli" not in source.replace("goofish-yao-cli", "")
 
 
 def test_round_trip():

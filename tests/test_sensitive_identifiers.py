@@ -45,7 +45,7 @@ def test_rejects_account_conversation_and_message_identifiers():
             f'{{"unb":"{account_id}"}}',
             f'{{"cid":"{conversation_id}"}}',
             f'{{"msg_ids":["{message_id}"]}}',
-            f'goofish message send {conversation_id} {account_id} --text hello',
+            f'goofish-yao message send {conversation_id} {account_id} --text hello',
             f'_make_cookie("unb", "{account_id}", ".taobao.com")',
             f'generate_device_id("{account_id}")',
         ]
@@ -73,7 +73,7 @@ def test_allows_masked_values_fake_fixtures_and_public_item_ids():
         [
             '{"unb":"<masked-unb>","tracknick":"<masked-tracknick>"}',
             '{"cid":"test-cid","send_user_id":"test-user"}',
-            "goofish item get 1045171414271",
+            "goofish-yao item get 1045171414271",
         ]
     )
 

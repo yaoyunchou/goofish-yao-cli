@@ -3,14 +3,14 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "goofish-cli"
+name = "goofish-yao-cli"
 version = "0.6.3"
 description = "闲鱼 CLI — 支持 MCP，未来支持 Claude Skills。为 AI Agent 提供闲鱼自动化基础能力。"
 readme = "README.md"
 license = { text = "Apache-2.0" }
 requires-python = ">=3.11"
-authors = [{ name = "fancy", email = "saral96@mail.com" }]
-keywords = ["xianyu", "goofish", "cli", "mcp", "ai-agent", "automation"]
+authors = [{ name = "yaoyunchou" }]
+keywords = ["xianyu", "goofish", "goofish-yao", "cli", "mcp", "ai-agent", "automation"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
@@ -47,31 +47,31 @@ dev = [
 ]
 
 [project.scripts]
-goofish = "goofish_cli.cli:app"
-# MCP server 入口。名字与 package 名一致，`uvx goofish-cli` 可直接拉起（uvx 默认按
+goofish-yao = "goofish_yao_cli.cli:app"
+# MCP server 入口。名字与 package 名一致，`uvx goofish-yao-cli` 可直接拉起（uvx 默认按
 # command 名查包，和 scripts 名对齐就不用 --from 绕弯）。这是 Claude Code 等 AI Agent
 # 配 MCP 时的推荐写法。
-goofish-cli = "goofish_cli.mcp_server:main"
-# 保留 `goofish-mcp` 别名只在 **本包已装** 时可用（`pip install goofish-cli` /
-# `uv tool install goofish-cli` / `uvx --from goofish-cli goofish-mcp`）。单独的
-# `uvx goofish-mcp` 仍会因 PyPI 无同名包解析失败 —— 这不是别名能救的，Claude Code
-# MCP 配置必须用上面的 `uvx goofish-cli`。
-goofish-mcp = "goofish_cli.mcp_server:main"
+goofish-yao-cli = "goofish_yao_cli.mcp_server:main"
+# 保留 `goofish-yao-mcp` 别名只在 **本包已装** 时可用（`pip install goofish-yao-cli` /
+# `uv tool install goofish-yao-cli` / `uvx --from goofish-yao-cli goofish-yao-mcp`）。单独的
+# `uvx goofish-yao-mcp` 仍会因 PyPI 无同名包解析失败 —— 这不是别名能救的，Claude Code
+# MCP 配置必须用上面的 `uvx goofish-yao-cli`。
+goofish-yao-mcp = "goofish_yao_cli.mcp_server:main"
 
 [project.urls]
-Homepage = "https://github.com/fancyboi999/goofish-cli"
-Repository = "https://github.com/fancyboi999/goofish-cli"
-Issues = "https://github.com/fancyboi999/goofish-cli/issues"
-Changelog = "https://github.com/fancyboi999/goofish-cli/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/yaoyunchou/goofish-yao-cli"
+Repository = "https://github.com/yaoyunchou/goofish-yao-cli"
+Issues = "https://github.com/yaoyunchou/goofish-yao-cli/issues"
+Changelog = "https://github.com/yaoyunchou/goofish-yao-cli/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/goofish_cli"]
+packages = ["src/goofish_yao_cli"]
 
-# 内置 Claude Skills：把项目根 `skills/` 收进 wheel 的 `goofish_cli/_bundled_skills/`，
-# 让 `goofish skills install` 能按包内路径定位到它（当前实现用 `goofish_cli.__file__`
+# 内置 Claude Skills：把项目根 `skills/` 收进 wheel 的 `goofish_yao_cli/_bundled_skills/`，
+# 让 `goofish-yao skills install` 能按包内路径定位到它（当前实现用 `goofish_yao_cli.__file__`
 # 拼子路径，不依赖 importlib.resources，避免 namespace package 在不同 py 版本上的行为差异）。
 [tool.hatch.build.targets.wheel.force-include]
-"skills" = "src/goofish_cli/_bundled_skills"
+"skills" = "src/goofish_yao_cli/_bundled_skills"
 
 [tool.hatch.build.targets.sdist]
 include = [

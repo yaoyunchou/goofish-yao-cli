@@ -1,8 +1,8 @@
 # MCP 工具速查（共 17 个）
 
-> 下表使用 registry 逻辑名。OpenClaw 调 `goofish__<逻辑名>`，Claude Code / Cursor
-> 调 `mcp__goofish__<逻辑名>`。例：CLI `goofish message list-chats` 的逻辑名是
-> `message_list_chats`。`goofish skills install` 也会被 registry 扫到并暴露为 `skills_install`，
+> 下表使用 registry 逻辑名。OpenClaw 调 `goofish-yao__<逻辑名>`，Claude Code / Cursor
+> 调 `mcp__goofish-yao__<逻辑名>`。例：CLI `goofish-yao message list-chats` 的逻辑名是
+> `message_list_chats`。`goofish-yao skills install` 也会被 registry 扫到并暴露为 `skills_install`，
 > 但它是给**用户在终端跑**的辅助命令，Agent 通常不主动调。
 
 ## Auth（3 个）
@@ -81,7 +81,7 @@ auth_status → search_items (用自家核心词，买家视角) → item_view (
 | 错误 | 含义 | 处理 |
 |---|---|---|
 | `FAIL_SYS_TOKEN_EXOIRED` | `_m_h5_tk` 过期（10 分钟 TTL） | 自动刷 token（已内置），Agent 无需干预 |
-| `FAIL_SYS_SESSION_EXPIRED` | `cookie2` session 失效 | 自动点 passport "快速进入"；失败则提示用户 `goofish auth login --qr` |
+| `FAIL_SYS_SESSION_EXPIRED` | `cookie2` session 失效 | 自动点 passport "快速进入"；失败则提示用户 `goofish-yao auth login --qr` |
 | `FAIL_SYS_ILLEGAL_ACCESS` | 风控拒绝 | **不要连续重试**（会加深风控）；按 `goofish-risk-guard/references/x5sec-recovery.md` 走——让用户从浏览器重导 cookie，或停手 2-6 小时 |
 | `RATE_LIMITED` | 本地令牌桶耗尽 | 等下一分钟 |
 | `GUARD_TRIPPED` | 本地熔断（连续风控触发） | `auth_reset_guard` + 从浏览器重导 cookie |

@@ -6,13 +6,13 @@ import subprocess
 
 def test_import_does_not_patch_global_popen():
     original_popen = subprocess.Popen
-    from goofish_cli.core import sign  # noqa: F401
+    from goofish_yao_cli.core import sign  # noqa: F401
 
     assert subprocess.Popen is original_popen
 
 
 def test_generate_sign_deterministic():
-    from goofish_cli.core.sign import generate_sign
+    from goofish_yao_cli.core.sign import generate_sign
 
     sign1 = generate_sign("1700000000000", "abcdef123456", '{"itemId":"1"}')
     sign2 = generate_sign("1700000000000", "abcdef123456", '{"itemId":"1"}')
@@ -22,7 +22,7 @@ def test_generate_sign_deterministic():
 
 
 def test_generate_sign_differs_on_input():
-    from goofish_cli.core.sign import generate_sign
+    from goofish_yao_cli.core.sign import generate_sign
 
     s1 = generate_sign("1700000000000", "abcdef123456", '{"itemId":"1"}')
     s2 = generate_sign("1700000000001", "abcdef123456", '{"itemId":"1"}')
@@ -30,7 +30,7 @@ def test_generate_sign_differs_on_input():
 
 
 def test_generate_device_id():
-    from goofish_cli.core.sign import generate_device_id
+    from goofish_yao_cli.core.sign import generate_device_id
 
     d1 = generate_device_id("testunb")
     # UUID 形式，后缀为 user_id

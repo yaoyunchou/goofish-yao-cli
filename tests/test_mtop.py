@@ -19,22 +19,22 @@ def test_t_precision_fixed():
 
 
 def test_classify_success():
-    from goofish_cli.core.mtop import _classify_error
+    from goofish_yao_cli.core.mtop import _classify_error
 
     _classify_error({"ret": ["SUCCESS::调用成功"]}, "mtop.test")  # 不抛
 
 
 def test_classify_auth():
-    from goofish_cli.core.errors import AuthRequiredError
-    from goofish_cli.core.mtop import _classify_error
+    from goofish_yao_cli.core.errors import AuthRequiredError
+    from goofish_yao_cli.core.mtop import _classify_error
 
     with pytest.raises(AuthRequiredError):
         _classify_error({"ret": ["FAIL_SYS_SESSION_EXPIRED::session expired"]}, "mtop.test")
 
 
 def test_classify_not_found():
-    from goofish_cli.core.errors import NotFoundError
-    from goofish_cli.core.mtop import _classify_error
+    from goofish_yao_cli.core.errors import NotFoundError
+    from goofish_yao_cli.core.mtop import _classify_error
 
     with pytest.raises(NotFoundError):
         _classify_error({"ret": ["FAIL_BIZ_ITEM_NOT_FOUND::商品不存在"]}, "mtop.test")
@@ -53,7 +53,7 @@ def test_classify_not_found():
     ],
 )
 def test_is_recoverable_auth_error(msg, expected):
-    from goofish_cli.core.errors import AuthRequiredError
-    from goofish_cli.core.mtop import _is_recoverable_auth_error
+    from goofish_yao_cli.core.errors import AuthRequiredError
+    from goofish_yao_cli.core.mtop import _is_recoverable_auth_error
 
     assert _is_recoverable_auth_error(AuthRequiredError(msg)) is expected

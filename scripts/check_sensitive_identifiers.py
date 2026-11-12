@@ -29,7 +29,7 @@ RULES = (
     ("numeric Xianyu conversation identifier", re.compile(r"\b\d{8,}@goofish\b")),
     (
         "message send command contains concrete identifiers",
-        re.compile(r"(?i)\bgoofish\s+message\s+send\s+\d{8,}\s+\d{8,}\b"),
+        re.compile(r"(?i)\bgoofish-yao\s+message\s+send\s+\d{8,}\s+\d{8,}\b"),
     ),
 )
 

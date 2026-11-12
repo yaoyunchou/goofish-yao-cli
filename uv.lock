@@ -306,7 +306,7 @@ wheels = [
 ]
 
 [[package]]
-name = "goofish-cli"
+name = "goofish-yao-cli"
 version = "0.4.0"
 source = { editable = "." }
 dependencies = [

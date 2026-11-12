@@ -7,22 +7,22 @@ description: |
   对比排查 → 按归因清单给出"限流可能性 + 修复建议"。**本 skill 纯读，
   不做任何写操作**——只诊断不修，修留给 `goofish-publish-item`。
 metadata:
-  author: goofish-cli
+  author: yaoyunchou
   version: "0.3.0"
   tags: [xianyu, diagnosis, traffic, rank]
 allowed-tools:
-  - mcp__goofish__auth_status
-  - mcp__goofish__search_items
-  - mcp__goofish__item_view
-  - mcp__goofish__item_get
+  - mcp__goofish-yao__auth_status
+  - mcp__goofish-yao__search_items
+  - mcp__goofish-yao__item_view
+  - mcp__goofish-yao__item_get
 ---
 
 # 闲鱼店铺诊断
 
 ## 工具命名
 
-正文使用 `auth_status` 这类逻辑名。OpenClaw 调 `goofish__<逻辑名>`；
-Claude Code / Cursor 调 `mcp__goofish__<逻辑名>`。frontmatter 的 `allowed-tools`
+正文使用 `auth_status` 这类逻辑名。OpenClaw 调 `goofish-yao__<逻辑名>`；
+Claude Code / Cursor 调 `mcp__goofish-yao__<逻辑名>`。frontmatter 的 `allowed-tools`
 保留 Claude 权限预批准格式，OpenClaw 不读取该字段。
 
 ## 定位
@@ -135,7 +135,7 @@ Agent 读 `item_view` 数据 → 在清单里逐项打分 → 找出最可能的
 
 ## 数据源限制
 
-goofish-cli v0.2.4 是**无状态**的——它不记你昨天的曝光是多少。所以：
+goofish-yao-cli v0.2.4 是**无状态**的——它不记你昨天的曝光是多少。所以：
 - "和昨天相比"的对比类诊断做不到
 - 只能基于**当前状态** + **已知规则**推断
 

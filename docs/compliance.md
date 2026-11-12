@@ -21,8 +21,8 @@
 ## 风控建议
 
 内置护栏默认配置：
-- 写操作限流：**1 次 / 分钟**（可通过 `GOOFISH_WRITE_RPM` 调，不建议调高）
-- 风控熔断时长：**10 分钟**（可通过 `GOOFISH_CIRCUIT_BREAK_MINUTES` 调）
+- 写操作限流：**1 次 / 分钟**（可通过 `GOOFISH_YAO_WRITE_RPM` 调，不建议调高）
+- 风控熔断时长：**10 分钟**（可通过 `GOOFISH_YAO_CIRCUIT_BREAK_MINUTES` 调）
 
 **强烈建议**：
 - 单账号每日写操作（发布+下架+改价）不超过 **20 次**

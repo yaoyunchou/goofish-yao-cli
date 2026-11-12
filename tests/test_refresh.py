@@ -6,8 +6,8 @@ from unittest.mock import patch
 import pytest
 import requests
 
-from goofish_cli.core import refresh
-from goofish_cli.core.session import Session
+from goofish_yao_cli.core import refresh
+from goofish_yao_cli.core.session import Session
 
 
 def _make_session(cookies: dict[str, str]) -> Session:
@@ -52,8 +52,8 @@ def test_refresh_merges_new_cookies_and_dedupes_same_name(tmp_path, monkeypatch)
     # 预埋一份旧 _m_h5_tk（默认 domain）
     session = _make_session({"_m_h5_tk": "old_1", "unb": "u1", "cookie2": "c2"})
 
-    # 通过 GOOFISH_COOKIES_PATH 让 resolve_cookie_path 指到测试临时路径
-    monkeypatch.setenv("GOOFISH_COOKIES_PATH", str(tmp_path / "cookies.json"))
+    # 通过 GOOFISH_YAO_COOKIES_PATH 让 resolve_cookie_path 指到测试临时路径
+    monkeypatch.setenv("GOOFISH_YAO_COOKIES_PATH", str(tmp_path / "cookies.json"))
 
     fresh = [_rec("_m_h5_tk", "new_2"), _rec("unb", "u1"), _rec("cookie2", "c3"), _rec("x5sec", "x")]
     with patch.object(refresh, "asyncio") as mock_async:
@@ -71,7 +71,7 @@ def test_refresh_merges_new_cookies_and_dedupes_same_name(tmp_path, monkeypatch)
 
 def test_refresh_fails_when_required_keys_missing(tmp_path, monkeypatch):
     session = _make_session({"_m_h5_tk": "old", "unb": "u1"})
-    monkeypatch.setenv("GOOFISH_COOKIES_PATH", str(tmp_path / "cookies.json"))
+    monkeypatch.setenv("GOOFISH_YAO_COOKIES_PATH", str(tmp_path / "cookies.json"))
 
     with patch.object(refresh, "asyncio") as mock_async:
         mock_async.run.side_effect = _fake_run([_rec("foo", "bar")])  # 没 _m_h5_tk / unb
@@ -85,9 +85,9 @@ def test_refresh_fails_when_required_keys_missing(tmp_path, monkeypatch):
 
 
 def test_refresh_respects_custom_cookie_path(tmp_path, monkeypatch):
-    """GOOFISH_COOKIES_PATH 自定义路径必须被尊重（Copilot review feedback）。"""
+    """GOOFISH_YAO_COOKIES_PATH 自定义路径必须被尊重（Copilot review feedback）。"""
     custom = tmp_path / "nested" / "my.json"
-    monkeypatch.setenv("GOOFISH_COOKIES_PATH", str(custom))
+    monkeypatch.setenv("GOOFISH_YAO_COOKIES_PATH", str(custom))
 
     session = _make_session({"_m_h5_tk": "old", "unb": "u1"})
     fresh = [_rec("_m_h5_tk", "new"), _rec("unb", "u1"), _rec("cookie2", "c")]
@@ -104,7 +104,7 @@ def test_refresh_respects_custom_cookie_path(tmp_path, monkeypatch):
 def test_refresh_fails_when_cookie2_missing(tmp_path, monkeypatch):
     """cookie2 是真正的 session token，缺它必须判失败（v0.2.3 Copilot review）。"""
     session = _make_session({"_m_h5_tk": "old", "unb": "u1", "cookie2": "old_c"})
-    monkeypatch.setenv("GOOFISH_COOKIES_PATH", str(tmp_path / "cookies.json"))
+    monkeypatch.setenv("GOOFISH_YAO_COOKIES_PATH", str(tmp_path / "cookies.json"))
 
     # fresh 有 _m_h5_tk / unb 但无 cookie2 —— 过去会误判成功，现在必须 False
     fresh = [_rec("_m_h5_tk", "new"), _rec("unb", "u1")]
@@ -131,7 +131,7 @@ def test_refresh_persist_false_success_assigns_merged_to_memory(tmp_path, monkey
     不能 UnboundLocalError，也不能丢无关老记录。
     """
     custom = tmp_path / "no_write.json"
-    monkeypatch.setenv("GOOFISH_COOKIES_PATH", str(custom))
+    monkeypatch.setenv("GOOFISH_YAO_COOKIES_PATH", str(custom))
 
     # 内存里老 records：unb + 一个无关 cookie `keep_old`
     old_records = [
@@ -174,7 +174,7 @@ def test_refresh_persist_false_success_assigns_merged_to_memory(tmp_path, monkey
 )
 def test_is_enabled_honors_env(monkeypatch, env, expected):
     if env is None:
-        monkeypatch.delenv("GOOFISH_AUTO_REFRESH_TOKEN", raising=False)
+        monkeypatch.delenv("GOOFISH_YAO_AUTO_REFRESH_TOKEN", raising=False)
     else:
-        monkeypatch.setenv("GOOFISH_AUTO_REFRESH_TOKEN", env)
+        monkeypatch.setenv("GOOFISH_YAO_AUTO_REFRESH_TOKEN", env)
     assert refresh.is_enabled() is expected
